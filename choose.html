@@ -657,8 +657,7 @@
       const MAX_WRONG = 2;
       let totalSeconds = 180;
 
-      /* ضع هنا رابط Google Apps Script بعد النشر */
-      const SHEET_API_URL = "PASTE_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
+      const API_URL = "/save-winner";
       let timerInterval = null;
       let isGameOver = false;
 
@@ -804,7 +803,7 @@
         const elapsed = 180 - totalSeconds;
         const record = {
           name,
-          level: "اختيار",
+          type: "choose",
           elapsedSeconds: elapsed,
           finishedAt: new Date().toISOString(),
         };
@@ -812,36 +811,29 @@
         status.innerText = "⏳ جاري الحفظ...";
         status.style.color = "#f5efdd";
 
-        const isSheetUrlSet =
-          SHEET_API_URL && !SHEET_API_URL.includes("PASTE_YOUR");
-        if (isSheetUrlSet) {
-          try {
-            const response = await fetch(SHEET_API_URL, {
-              method: "POST",
-              body: JSON.stringify(record),
-              headers: { "Content-Type": "application/json" },
-            });
-            const result = await response.json();
-            if (result.result === "success") {
-              status.innerText = "✅ تم حفظ إنجازك!";
-              status.style.color = "#9fdcb4";
-              nameInput.disabled = true;
-              return;
-            }
-            throw new Error(result.error || "فشل الحفظ");
-          } catch (err) {
-            console.error("Sheet save failed, falling back to localStorage", err);
+        try {
+          const response = await fetch(API_URL, {
+            method: "POST",
+            body: JSON.stringify(record),
+            headers: { "Content-Type": "application/json" },
+          });
+          const result = await response.json();
+          if (result.result === "success") {
+            status.innerText = "✅ تم حفظ إنجازك!";
+            status.style.color = "#9fdcb4";
+            nameInput.disabled = true;
+            return;
           }
+          throw new Error(result.error || "فشل الحفظ");
+        } catch (err) {
+          console.error("Server save failed, falling back to localStorage", err);
+          const winners = JSON.parse(localStorage.getItem("nabawiWinners") || "[]");
+          winners.push(record);
+          localStorage.setItem("nabawiWinners", JSON.stringify(winners));
+          status.innerText = "⚠️ تم الحفظ محلياً فقط (تعذّر الاتصال بالخادم).";
+          status.style.color = "#e8cf7a";
+          nameInput.disabled = true;
         }
-
-        const winners = JSON.parse(localStorage.getItem("nabawiWinners") || "[]");
-        winners.push(record);
-        localStorage.setItem("nabawiWinners", JSON.stringify(winners));
-        status.innerText = isSheetUrlSet
-          ? "⚠️ تم الحفظ محلياً فقط (تعذّر الاتصال بالخادم)."
-          : "✅ تم الحفظ محلياً (لا يوجد رابط خادم).";
-        status.style.color = "#e8cf7a";
-        nameInput.disabled = true;
       }
 
       /* كونفيتي للاحتفال */

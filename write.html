@@ -517,8 +517,7 @@
     const MAX_WRONG = 2;
     let totalSeconds = 180;
 
-    /* ضع هنا رابط Google Apps Script بعد النشر */
-    const SHEET_API_URL = "PASTE_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
+    const API_URL = "/save-winner";
     let timerInterval = null;
     let isGameOver = false;
 
@@ -645,7 +644,7 @@
         launchConfetti();
     }
 
-    function saveWinner() {
+    async function saveWinner() {
         const nameInput = document.getElementById("winnerName");
         const status = document.getElementById("saveStatus");
         const name = nameInput.value.trim();
@@ -657,16 +656,37 @@
         const elapsed = 180 - totalSeconds;
         const record = {
             name,
-            level: "كتابة",
+            type: "write",
             elapsedSeconds: elapsed,
             finishedAt: new Date().toISOString()
         };
-        const winners = JSON.parse(localStorage.getItem("nabawiWinners") || "[]");
-        winners.push(record);
-        localStorage.setItem("nabawiWinners", JSON.stringify(winners));
-        status.innerText = "✅ تم حفظ إنجازك!";
-        status.style.color = "#9fdcb4";
-        nameInput.disabled = true;
+
+        status.innerText = "⏳ جاري الحفظ...";
+        status.style.color = "#f5efdd";
+
+        try {
+            const response = await fetch(API_URL, {
+                method: "POST",
+                body: JSON.stringify(record),
+                headers: { "Content-Type": "application/json" },
+            });
+            const result = await response.json();
+            if (result.result === "success") {
+                status.innerText = "✅ تم حفظ إنجازك!";
+                status.style.color = "#9fdcb4";
+                nameInput.disabled = true;
+                return;
+            }
+            throw new Error(result.error || "فشل الحفظ");
+        } catch (err) {
+            console.error("Server save failed, falling back to localStorage", err);
+            const winners = JSON.parse(localStorage.getItem("nabawiWinners") || "[]");
+            winners.push(record);
+            localStorage.setItem("nabawiWinners", JSON.stringify(winners));
+            status.innerText = "⚠️ تم الحفظ محلياً فقط (تعذّر الاتصال بالخادم).";
+            status.style.color = "#e8cf7a";
+            nameInput.disabled = true;
+        }
     }
 
     /* كونفيتي للاحتفال */
