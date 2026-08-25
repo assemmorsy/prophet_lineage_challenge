@@ -422,7 +422,7 @@
     <div class="game-header">
         <div class="prize-box">🎁 الجائزة: ١٠٠ جنيه</div>
         <div class="stars-box" id="starsBox">✦ الأسماء الصحيحة: ٠ / ٢١</div>
-        <div class="wrong-box" id="wrongBox">✖ المحاولات الخاطئة: ٠</div>
+        <div class="wrong-box" id="wrongBox">✖ المحاولات الخاطئة: ٠ / ٣</div>
         <div class="timer-box" id="timerBox">⏳ الوقت المتبقي: ٠٣:٠٠</div>
     </div>
 
@@ -455,14 +455,13 @@
         </div>
     </div>
 
-    <!-- شاشة انتهاء الوقت -->
-    <div class="win-banner" id="timeoutBanner">
+    <!-- شاشة انتهاء اللعبة: إعادة إجبارية -->
+    <div class="win-banner" id="gameOverBanner">
         <div class="win-card">
-            <h2>انتهى الوقت ⏳</h2>
-            <p>هل تريد البدء من جديد أم استكمال ما وصلت إليه<br>بثلاث دقائق إضافية؟</p>
+            <h2 id="gameOverTitle">انتهى الوقت ⏳</h2>
+            <p id="gameOverText"></p>
             <div class="win-actions">
-                <button onclick="resumeGame()">استكمال ▶</button>
-                <button class="secondary" onclick="location.reload()">محاولة أخرى 🔁</button>
+                <button onclick="location.reload()">محاولة أخرى 🔁</button>
             </div>
         </div>
     </div>
@@ -484,6 +483,7 @@
 
     let currentIndex = 0;
     let wrongCount = 0;
+    const MAX_WRONG = 3;
     let totalSeconds = 180;
     let timerInterval = null;
     let isGameOver = false;
@@ -504,7 +504,10 @@
                 clearInterval(timerInterval);
                 isGameOver = true;
                 timerBox.innerText = "⏳ انتهى الوقت!";
-                showTimeout();
+                showGameOver(
+                    "انتهى الوقت ⏳",
+                    "للأسف انتهت الدقائق الثلاث!<br>ابدأ من جديد وحاول إكمال النسب في الوقت المحدد"
+                );
                 return;
             }
             totalSeconds--;
@@ -515,17 +518,11 @@
         }, 1000);
     }
 
-    /* عند انتهاء الوقت: محاولة أخرى أو استكمال بثلاث دقائق جديدة */
-    function showTimeout() {
-        document.getElementById("timeoutBanner").style.display = "flex";
-    }
-
-    function resumeGame() {
-        document.getElementById("timeoutBanner").style.display = "none";
-        totalSeconds = 180;
-        isGameOver = false;
-        timerBox.classList.remove("warning");
-        startTimer();
+    /* نهاية اللعبة: يجب البدء من جديد، لا يوجد استكمال */
+    function showGameOver(title, text) {
+        document.getElementById("gameOverTitle").innerText = title;
+        document.getElementById("gameOverText").innerHTML = text;
+        document.getElementById("gameOverBanner").style.display = "flex";
     }
 
     /* بناء أزرار الاختيار */
@@ -571,7 +568,7 @@
             }
         } else {
             wrongCount++;
-            wrongBox.innerText = `✖ المحاولات الخاطئة: ${toArabicNumber(wrongCount)}`;
+            wrongBox.innerText = `✖ المحاولات الخاطئة: ${toArabicNumber(wrongCount)} / ${toArabicNumber(MAX_WRONG)}`;
             wrongBox.classList.remove("bump");
             void wrongBox.offsetWidth; /* إعادة تشغيل الحركة */
             wrongBox.classList.add("bump");
@@ -582,7 +579,19 @@
                 btn.classList.remove("wrong");
                 nextSlot.classList.remove("shake");
             }, 550);
-            showToast("ليس هذا الاسم، ركّز وحاول مرة أخرى", "error");
+
+            /* ثلاث محاولات خاطئة = بداية من جديد */
+            if (wrongCount >= MAX_WRONG) {
+                isGameOver = true;
+                clearInterval(timerInterval);
+                setTimeout(() => showGameOver(
+                    "ثلاث محاولات خاطئة ❌",
+                    "لقد أخطأت ثلاث مرات!<br>ابدأ من جديد وركّز في ترتيب النسب الشريف"
+                ), 700);
+                return;
+            }
+
+            showToast(`ليس هذا الاسم! تبقّى لك ${toArabicNumber(MAX_WRONG - wrongCount)} محاولات`, "error");
         }
     }
 
