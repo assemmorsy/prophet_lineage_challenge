@@ -1,635 +1,252 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مسابقة النسب النبوي الشريف ﷺ</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>مسابقة النسب النبوي الشريف ﷺ — اختر المستوى</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        * {
-            box-sizing: border-box;
-            font-family: 'Cairo', Tahoma, sans-serif;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
-        }
+      * {
+        box-sizing: border-box;
+        font-family: "Cairo", Tahoma, sans-serif;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
 
-        :root {
-            --gold: #d4af37;
-            --gold-soft: #e8cf7a;
-            --emerald: #0b3d2e;
-            --emerald-light: #14694a;
-            --cream: #f5efdd;
-            --ink: #06231a;
-        }
+      :root {
+        --gold: #d4af37;
+        --gold-soft: #e8cf7a;
+        --cream: #f5efdd;
+        --ink: #06231a;
+      }
 
-        body {
-            background-color: var(--ink);
-            /* زخرفة إسلامية هندسية خفيفة */
-            background-image:
-                linear-gradient(180deg, rgba(6,35,26,0.92), rgba(11,61,46,0.95)),
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23d4af37' stroke-width='1' opacity='0.35'%3E%3Cpath d='M40 8 L48 32 L72 40 L48 48 L40 72 L32 48 L8 40 L32 32 Z'/%3E%3Ccircle cx='40' cy='40' r='10'/%3E%3C/g%3E%3C/svg%3E");
-            background-size: auto, 80px 80px;
-            color: var(--cream);
-            margin: 0;
-            padding: 14px 14px 40px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
+      body {
+        background-color: var(--ink);
+        background-image:
+          linear-gradient(
+            180deg,
+            rgba(6, 35, 26, 0.92),
+            rgba(11, 61, 46, 0.95)
+          ),
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23d4af37' stroke-width='1' opacity='0.35'%3E%3Cpath d='M40 8 L48 32 L72 40 L48 48 L40 72 L32 48 L8 40 L32 32 Z'/%3E%3Ccircle cx='40' cy='40' r='10'/%3E%3C/g%3E%3C/svg%3E");
+        background-size:
+          auto,
+          80px 80px;
+        color: var(--cream);
+        margin: 0;
+        padding: 20px 14px 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
 
-        /* ===== الترويسة ===== */
-        header {
-            text-align: center;
-            margin-bottom: 14px;
-            width: 100%;
-            max-width: 950px;
-        }
-        .bismillah {
-            color: var(--gold-soft);
-            font-family: 'Amiri', serif;
-            font-size: 1.05rem;
-            opacity: 0.9;
-            margin: 0;
-        }
-        h1 {
-            color: var(--gold);
-            font-family: 'Amiri', serif;
-            font-weight: 700;
-            text-shadow: 0 2px 12px rgba(212, 175, 55, 0.35);
-            margin: 2px 0 4px;
-            font-size: clamp(1.5rem, 4.5vw, 2.2rem);
-        }
-        .title-rule {
-            width: 220px;
-            max-width: 60%;
-            height: 2px;
-            margin: 4px auto 8px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-            position: relative;
-        }
-        .title-rule::after {
-            content: "✦";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: var(--gold);
-            background: transparent;
-            font-size: 0.9rem;
-        }
-        p.subtitle {
-            color: #bcd8c6;
-            margin: 0;
-            font-size: clamp(0.85rem, 2.5vw, 1rem);
-        }
+      header {
+        text-align: center;
+        margin-bottom: 26px;
+      }
+      .bismillah {
+        color: var(--gold-soft);
+        font-family: "Amiri", serif;
+        font-size: 1.05rem;
+        opacity: 0.9;
+        margin: 0;
+      }
+      h1 {
+        color: var(--gold);
+        font-family: "Amiri", serif;
+        font-weight: 700;
+        text-shadow: 0 2px 12px rgba(212, 175, 55, 0.35);
+        margin: 4px 0 6px;
+        font-size: clamp(1.5rem, 5vw, 2.3rem);
+      }
+      .title-rule {
+        width: 220px;
+        max-width: 60%;
+        height: 2px;
+        margin: 4px auto 10px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--gold),
+          transparent
+        );
+        position: relative;
+      }
+      .title-rule::after {
+        content: "✦";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: var(--gold);
+        font-size: 0.9rem;
+      }
+      p.subtitle {
+        color: #bcd8c6;
+        margin: 0;
+        font-size: clamp(0.85rem, 2.6vw, 1rem);
+      }
 
-        /* ===== شريط الجائزة والعداد ===== */
-        .game-header {
-            width: 100%;
-            max-width: 950px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-            background: rgba(245, 239, 221, 0.05);
-            border: 1px solid rgba(212, 175, 55, 0.45);
-            border-radius: 16px;
-            padding: 10px 16px;
-            margin-bottom: 14px;
-            box-shadow: 0 4px 14px rgba(0,0,0,0.35);
-        }
-        .prize-box, .stars-box, .timer-box, .wrong-box {
-            font-size: clamp(0.85rem, 2.4vw, 1.05rem);
-            font-weight: 700;
-            padding: 7px 14px;
-            border-radius: 12px;
-            white-space: nowrap;
-        }
-        .prize-box {
-            color: var(--gold-soft);
-            border: 1px solid var(--gold);
-            background: rgba(212, 175, 55, 0.1);
-        }
-        .stars-box {
-            color: #9fdcb4;
-            border: 1px solid #3d8b63;
-            background: rgba(61, 139, 99, 0.12);
-        }
-        .wrong-box {
-            color: #ff8f8f;
-            border: 1px solid #a93226;
-            background: rgba(192, 57, 43, 0.12);
-        }
-        .wrong-box.bump {
-            animation: bump 0.4s ease;
-        }
-        @keyframes bump {
-            0% { transform: scale(1); }
-            40% { transform: scale(1.15); background: rgba(192, 57, 43, 0.35); }
-            100% { transform: scale(1); }
-        }
-        .timer-box {
-            color: var(--gold-soft);
-            border: 1px solid var(--gold);
-            background: rgba(212, 175, 55, 0.1);
-            font-variant-numeric: tabular-nums;
-        }
-        .timer-box.warning {
-            color: #ff8f8f;
-            border-color: #c0392b;
-            background: rgba(192, 57, 43, 0.18);
-            animation: pulse 1s infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
+      .prize-note {
+        color: var(--gold-soft);
+        border: 1px dashed var(--gold);
+        background: rgba(212, 175, 55, 0.08);
+        border-radius: 12px;
+        padding: 8px 20px;
+        font-weight: 700;
+        font-size: clamp(0.85rem, 2.6vw, 1rem);
+        margin-bottom: 24px;
+        text-align: center;
+      }
 
-        /* ===== شريط السلسلة: الأسماء متجاورة وبينها "بن" ===== */
-        .chain-panel {
-            width: 100%;
-            max-width: 950px;
-            background: linear-gradient(160deg, rgba(245,239,221,0.08), rgba(245,239,221,0.03));
-            border: 1px solid rgba(212, 175, 55, 0.35);
-            border-radius: 18px;
-            padding: 16px 14px;
-            margin-bottom: 14px;
-            box-shadow: inset 0 0 26px rgba(0,0,0,0.3), 0 6px 16px rgba(0,0,0,0.3);
-            position: relative;
-        }
-        /* إطار مزخرف بزوايا */
-        .chain-panel::before {
-            content: "";
-            position: absolute;
-            inset: 6px;
-            border: 1px solid rgba(212, 175, 55, 0.18);
-            border-radius: 12px;
-            pointer-events: none;
-        }
-        .chain-title {
-            color: var(--gold);
-            font-family: 'Amiri', serif;
-            font-weight: 700;
-            font-size: clamp(0.95rem, 2.6vw, 1.1rem);
-            margin-bottom: 12px;
-            text-align: center;
-        }
-        .chain-flow {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 8px 6px;
-            justify-content: center;
-        }
-        .chain-chip {
-            background: linear-gradient(160deg, #14694a, #0b3d2e);
-            border: 1px solid var(--gold);
-            color: var(--cream);
-            font-family: 'Amiri', serif;
-            font-weight: 700;
-            font-size: clamp(0.95rem, 3vw, 1.2rem);
-            padding: 4px 16px;
-            border-radius: 8px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.35);
-            animation: chipPop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        .chain-chip.prophet {
-            background: linear-gradient(160deg, var(--gold), #b8942a);
-            border-color: var(--gold-soft);
-            color: #2e2405;
-        }
-        .chain-connector {
-            color: var(--gold);
-            font-family: 'Amiri', serif;
-            font-weight: 700;
-            font-size: clamp(0.9rem, 2.6vw, 1.1rem);
-        }
-        .chain-slot {
-            min-width: 64px;
-            text-align: center;
-            border: 2px dashed var(--gold);
-            color: var(--gold);
-            font-weight: 700;
-            font-size: clamp(1rem, 3vw, 1.25rem);
-            padding: 4px 16px;
-            border-radius: 8px;
-            background: rgba(212, 175, 55, 0.07);
-            animation: slotGlow 1.6s infinite ease-in-out;
-        }
-        @keyframes slotGlow {
-            0%, 100% { box-shadow: 0 0 3px rgba(212,175,55,0.25); opacity: 0.7; }
-            50% { box-shadow: 0 0 14px rgba(212,175,55,0.6); opacity: 1; }
-        }
-        .chain-slot.shake {
-            animation: shake 0.5s;
-            border-color: #e74c3c;
-            color: #ff8f8f;
-        }
-        @keyframes chipPop {
-            0% { transform: scale(0.3) translateY(-8px); opacity: 0; }
-            70% { transform: scale(1.12) translateY(1px); }
-            100% { transform: scale(1) translateY(0); opacity: 1; }
-        }
+      .levels {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        max-width: 800px;
+      }
 
-        /* ===== منطقة اختيار الأسماء ===== */
-        .bank-panel {
-            width: 100%;
-            max-width: 950px;
-            background: rgba(245, 239, 221, 0.04);
-            border: 1px solid rgba(212, 175, 55, 0.25);
-            border-radius: 18px;
-            padding: 14px;
-            text-align: center;
-        }
-        .bank-title {
-            color: #bcd8c6;
-            font-size: clamp(0.85rem, 2.4vw, 1rem);
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-        .names-flex {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            justify-content: center;
-        }
-        .name-btn {
-            background: linear-gradient(160deg, #14694a, #0b3d2e);
-            color: var(--cream);
-            font-family: 'Amiri', serif;
-            padding: 8px 18px;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: clamp(0.95rem, 3vw, 1.15rem);
-            cursor: pointer;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.35);
-            border: 1px solid rgba(212, 175, 55, 0.5);
-            transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
-            touch-action: manipulation;
-        }
-        .name-btn:hover {
-            transform: translateY(-2px);
-            border-color: var(--gold);
-            box-shadow: 0 6px 14px rgba(0,0,0,0.45);
-        }
-        .name-btn:active { transform: translateY(0) scale(0.97); }
-        .name-btn.used {
-            opacity: 0.22;
-            pointer-events: none;
-            filter: grayscale(0.7);
-        }
-        .name-btn.wrong {
-            animation: shake 0.5s;
-            border-color: #e74c3c;
-            box-shadow: 0 0 14px rgba(231, 76, 60, 0.7);
-        }
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            20% { transform: translateX(-9px); }
-            40% { transform: translateX(9px); }
-            60% { transform: translateX(-6px); }
-            80% { transform: translateX(6px); }
-        }
+      .level-card {
+        flex: 1;
+        min-width: 260px;
+        max-width: 370px;
+        background: linear-gradient(
+          160deg,
+          rgba(245, 239, 221, 0.08),
+          rgba(245, 239, 221, 0.03)
+        );
+        border: 1px solid rgba(212, 175, 55, 0.45);
+        border-radius: 18px;
+        padding: 26px 22px;
+        text-align: center;
+        cursor: pointer;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease,
+          border-color 0.2s ease;
+        position: relative;
+      }
+      .level-card::before {
+        content: "";
+        position: absolute;
+        inset: 6px;
+        border: 1px solid rgba(212, 175, 55, 0.18);
+        border-radius: 12px;
+        pointer-events: none;
+      }
+      .level-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--gold);
+        box-shadow:
+          0 12px 26px rgba(0, 0, 0, 0.5),
+          0 0 18px rgba(212, 175, 55, 0.25);
+      }
 
-        /* ===== شريط التقدم ===== */
-        .progress-track {
-            width: 100%;
-            max-width: 950px;
-            height: 12px;
-            background: rgba(245,239,221,0.1);
-            border-radius: 8px;
-            margin-top: 14px;
-            overflow: hidden;
-            border: 1px solid rgba(212,175,55,0.3);
-        }
-        .progress-fill {
-            height: 100%;
-            width: 0%;
-            border-radius: 8px;
-            background: linear-gradient(90deg, #b8942a, var(--gold), #9fdcb4);
-            transition: width 0.5s ease;
-        }
+      .level-icon {
+        font-size: 2.6rem;
+        margin-bottom: 8px;
+      }
+      .level-card h2 {
+        color: var(--gold);
+        font-family: "Amiri", serif;
+        font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+        margin: 0 0 6px;
+      }
+      .level-badge {
+        display: inline-block;
+        font-size: 0.8rem;
+        font-weight: 700;
+        padding: 3px 14px;
+        border-radius: 20px;
+        margin-bottom: 10px;
+      }
+      .badge-easy {
+        color: #9fdcb4;
+        border: 1px solid #3d8b63;
+        background: rgba(61, 139, 99, 0.15);
+      }
+      .badge-hard {
+        color: #ffcf9f;
+        border: 1px solid #ca6f1e;
+        background: rgba(202, 111, 30, 0.15);
+      }
+      .level-card p {
+        color: #bcd8c6;
+        font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+        line-height: 1.9;
+        margin: 0 0 16px;
+      }
+      .level-btn {
+        background: linear-gradient(160deg, var(--gold), #b8942a);
+        color: #2e2405;
+        border: none;
+        padding: 10px 30px;
+        font-size: 1rem;
+        font-weight: 700;
+        font-family: "Cairo", sans-serif;
+        border-radius: 10px;
+        cursor: pointer;
+        width: 100%;
+      }
 
-        /* ===== رسالة الفوز والكونفيتي ===== */
-        .win-banner {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(4, 20, 14, 0.88);
-            z-index: 50;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            text-align: center;
-            padding: 20px;
-        }
-        .win-card {
-            background: linear-gradient(160deg, #0b3d2e, #06231a);
-            border: 2px solid var(--gold);
-            border-radius: 20px;
-            padding: 32px 28px;
-            box-shadow: 0 0 40px rgba(212, 175, 55, 0.35);
-            animation: chipPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-            max-width: 520px;
-            width: 100%;
-        }
-        .win-card h2 {
-            color: var(--gold);
-            font-family: 'Amiri', serif;
-            font-size: clamp(1.4rem, 5vw, 1.9rem);
-            margin: 0 0 10px;
-        }
-        .win-card p {
-            color: #bcd8c6;
-            font-size: clamp(0.95rem, 3vw, 1.15rem);
-            margin: 0 0 20px;
-            line-height: 1.9;
-        }
-        .win-card button {
-            background: linear-gradient(160deg, var(--gold), #b8942a);
-            color: #2e2405;
-            border: none;
-            padding: 12px 34px;
-            font-size: 1.05rem;
-            font-weight: 700;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-        .win-actions {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .win-card button.secondary {
-            background: transparent;
-            color: var(--gold-soft);
-            border: 1px solid var(--gold);
-        }
-        .confetti {
-            position: fixed;
-            top: -20px;
-            z-index: 60;
-            pointer-events: none;
-            animation: fall linear forwards;
-        }
-        @keyframes fall {
-            to { transform: translateY(110vh) rotate(720deg); opacity: 0.7; }
-        }
-
-        .toast {
-            position: fixed;
-            bottom: 22px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 10px 24px;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: clamp(0.85rem, 2.6vw, 1rem);
-            color: white;
-            display: none;
-            z-index: 100;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.45);
-            max-width: 90vw;
-            text-align: center;
-        }
-        .toast.error { background-color: #a93226; border: 1px solid #e74c3c; }
-        .toast.success { background-color: #d5f5e3; color: #0b3d2e; border: 1px solid #3d8b63; }
-
-        /* ===== تجاوب الجوال ===== */
-        @media (max-width: 640px) {
-            body { padding: 10px 10px 30px; }
-            .game-header { justify-content: center; padding: 8px 10px; }
-            .chain-panel, .bank-panel { padding: 12px 10px; }
-            .name-btn { padding: 8px 14px; }
-            .chain-chip { padding: 4px 12px; }
-            .chain-slot { min-width: 52px; padding: 4px 12px; }
-        }
+      .rules {
+        margin-top: 26px;
+        color: #8fb89e;
+        font-size: clamp(0.78rem, 2.3vw, 0.9rem);
+        text-align: center;
+        line-height: 2;
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <header>
-        <p class="bismillah">بسم الله الرحمن الرحيم</p>
-        <h1>مسابقة النسب النبوي الشريف ﷺ</h1>
-        <div class="title-rule"></div>
-        <p class="subtitle">اختر الاسم الصحيح بالترتيب لتكمل سلسلة النسب المطهّر حتى عدنان</p>
+      <p class="bismillah">بسم الله الرحمن الرحيم</p>
+      <h1>مسابقة النسب النبوي الشريف ﷺ</h1>
+      <div class="title-rule"></div>
+      <p class="subtitle">أكمل سلسلة النسب المطهّر من سيدنا محمد ﷺ حتى عدنان</p>
     </header>
 
-    <div class="game-header">
-        <div class="prize-box">🎁 الجائزة: ١٠٠ جنيه</div>
-        <div class="stars-box" id="starsBox">✦ الأسماء الصحيحة: ٠ / ٢١</div>
-        <div class="wrong-box" id="wrongBox">✖ المحاولات الخاطئة: ٠ / ٣</div>
-        <div class="timer-box" id="timerBox">⏳ الوقت المتبقي: ٠٣:٠٠</div>
+    <div class="prize-note">
+      🎁 الجائزة: ١٠٠ جنيه — ⏳ الوقت: ٣ دقائق — ❌ مسموح بخطأين فقط قبل البداية
+      من جديد
     </div>
 
-    <!-- سلسلة النسب: الأسماء متجاورة وبينها "بن" -->
-    <div class="chain-panel">
-        <div class="chain-title">سلسلة النسب الشريف</div>
-        <div class="chain-flow" id="chainFlow">
-            <span class="chain-chip prophet">سيدنا محمد ﷺ</span>
-            <span class="chain-connector">بن</span>
-            <span class="chain-slot" id="nextSlot">؟</span>
-        </div>
+    <div class="levels">
+      <div class="level-card" onclick="location.href = 'choose.html'">
+        <div class="level-icon">👆</div>
+        <h2>المستوى الأول: الاختيار</h2>
+        <span class="level-badge badge-easy">أسهل</span>
+        <p>
+          تظهر لك الأسماء في بطاقات ملوّنة،<br />اضغط على الاسم الصحيح
+          بالترتيب<br />ليكتمل النسب: محمد ﷺ بن ... بن عدنان
+        </p>
+        <button class="level-btn">ابدأ بالاختيار</button>
+      </div>
+
+      <div class="level-card" onclick="location.href = 'write.html'">
+        <div class="level-icon">✍️</div>
+        <h2>المستوى الثاني: الكتابة</h2>
+        <span class="level-badge badge-hard">أصعب</span>
+        <p>
+          بدون بطاقات مساعدة،<br />اكتب اسم كل أب بالترتيب من ذاكرتك<br />حتى
+          تكمل السلسلة كاملة
+        </p>
+        <button class="level-btn">ابدأ بالكتابة</button>
+      </div>
     </div>
 
-    <!-- منطقة اختيار الأسماء -->
-    <div class="bank-panel">
-        <div class="bank-title">اضغط على اسم الأب التالي في النسب:</div>
-        <div class="names-flex" id="namesBank"></div>
+    <div class="rules">
+      اختر المستوى المناسب لك — أكمل السلسلة كاملة قبل انتهاء الوقت لتفوز
+      بالجائزة
     </div>
-
-    <div class="progress-track">
-        <div class="progress-fill" id="progressFill"></div>
-    </div>
-
-    <!-- شاشة الفوز -->
-    <div class="win-banner" id="winBanner">
-        <div class="win-card">
-            <h2>ما شاء الله، أحسنت!</h2>
-            <p>أكملت سلسلة نسب النبي ﷺ كاملة قبل انتهاء الوقت<br>وتستحق جائزة الـ ١٠٠ جنيه</p>
-            <button onclick="location.reload()">العب مرة أخرى</button>
-        </div>
-    </div>
-
-    <!-- شاشة انتهاء اللعبة: إعادة إجبارية -->
-    <div class="win-banner" id="gameOverBanner">
-        <div class="win-card">
-            <h2 id="gameOverTitle">انتهى الوقت ⏳</h2>
-            <p id="gameOverText"></p>
-            <div class="win-actions">
-                <button onclick="location.reload()">محاولة أخرى 🔁</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="toast" id="toastMsg"></div>
-
-<script>
-    const ancestry = [
-        "عبد الله", "عبد المطلب", "هاشم", "عبد مناف", "قصي",
-        "كلاب", "مرة", "كعب", "لؤي", "غالب",
-        "فهر", "مالك", "النضر", "كنانة", "خزيمة",
-        "مدركة", "إلياس", "مضر", "نزار", "معد", "عدنان"
-    ];
-
-    const arabicDigits = ["٠", "١", "٢", "٣", "٤", "٥", "٦", "٧", "٨", "٩"];
-    function toArabicNumber(num) {
-        return num.toString().replace(/\d/g, d => arabicDigits[d]);
-    }
-
-    let currentIndex = 0;
-    let wrongCount = 0;
-    const MAX_WRONG = 3;
-    let totalSeconds = 180;
-    let timerInterval = null;
-    let isGameOver = false;
-
-    const chainFlow = document.getElementById("chainFlow");
-    const nextSlot = document.getElementById("nextSlot");
-    const namesBank = document.getElementById("namesBank");
-    const starsBox = document.getElementById("starsBox");
-    const wrongBox = document.getElementById("wrongBox");
-    const progressFill = document.getElementById("progressFill");
-    const toastMsg = document.getElementById("toastMsg");
-    const timerBox = document.getElementById("timerBox");
-    const winBanner = document.getElementById("winBanner");
-
-    function startTimer() {
-        timerInterval = setInterval(() => {
-            if (totalSeconds <= 0) {
-                clearInterval(timerInterval);
-                isGameOver = true;
-                timerBox.innerText = "⏳ انتهى الوقت!";
-                showGameOver(
-                    "انتهى الوقت ⏳",
-                    "للأسف انتهت الدقائق الثلاث!<br>ابدأ من جديد وحاول إكمال النسب في الوقت المحدد"
-                );
-                return;
-            }
-            totalSeconds--;
-            const mins = Math.floor(totalSeconds / 60);
-            const secs = totalSeconds % 60;
-            timerBox.innerText = `⏳ الوقت المتبقي: ${toArabicNumber(mins)}:${secs < 10 ? '٠' + toArabicNumber(secs) : toArabicNumber(secs)}`;
-            if (totalSeconds <= 30) timerBox.classList.add("warning");
-        }, 1000);
-    }
-
-    /* نهاية اللعبة: يجب البدء من جديد، لا يوجد استكمال */
-    function showGameOver(title, text) {
-        document.getElementById("gameOverTitle").innerText = title;
-        document.getElementById("gameOverText").innerHTML = text;
-        document.getElementById("gameOverBanner").style.display = "flex";
-    }
-
-    /* بناء أزرار الاختيار */
-    function initBank() {
-        const shuffled = [...ancestry].sort(() => Math.random() - 0.5);
-        shuffled.forEach(name => {
-            const btn = document.createElement("div");
-            btn.className = "name-btn";
-            btn.innerText = name;
-            btn.addEventListener("click", () => handlePick(name, btn));
-            namesBank.appendChild(btn);
-        });
-    }
-
-    /* الضغط على اسم: يذهب مباشرة لمكانه التالي إن كان صحيحاً */
-    function handlePick(name, btn) {
-        if (isGameOver || btn.classList.contains("used")) return;
-
-        if (name === ancestry[currentIndex]) {
-            const chip = document.createElement("span");
-            chip.className = "chain-chip";
-            chip.innerText = name;
-
-            const connector = document.createElement("span");
-            connector.className = "chain-connector";
-            connector.innerText = "بن";
-
-            chainFlow.insertBefore(chip, nextSlot);
-            chainFlow.insertBefore(connector, nextSlot);
-
-            btn.classList.add("used");
-            currentIndex++;
-
-            starsBox.innerText = `✦ الأسماء الصحيحة: ${toArabicNumber(currentIndex)} / ${toArabicNumber(ancestry.length)}`;
-            progressFill.style.width = (currentIndex / ancestry.length * 100) + "%";
-
-            showToast("إجابة صحيحة، أحسنت", "success");
-
-            if (currentIndex === ancestry.length) {
-                nextSlot.style.display = "none";
-                clearInterval(timerInterval);
-                setTimeout(showWin, 600);
-            }
-        } else {
-            wrongCount++;
-            wrongBox.innerText = `✖ المحاولات الخاطئة: ${toArabicNumber(wrongCount)} / ${toArabicNumber(MAX_WRONG)}`;
-            wrongBox.classList.remove("bump");
-            void wrongBox.offsetWidth; /* إعادة تشغيل الحركة */
-            wrongBox.classList.add("bump");
-
-            btn.classList.add("wrong");
-            nextSlot.classList.add("shake");
-            setTimeout(() => {
-                btn.classList.remove("wrong");
-                nextSlot.classList.remove("shake");
-            }, 550);
-
-            /* ثلاث محاولات خاطئة = بداية من جديد */
-            if (wrongCount >= MAX_WRONG) {
-                isGameOver = true;
-                clearInterval(timerInterval);
-                setTimeout(() => showGameOver(
-                    "ثلاث محاولات خاطئة ❌",
-                    "لقد أخطأت ثلاث مرات!<br>ابدأ من جديد وركّز في ترتيب النسب الشريف"
-                ), 700);
-                return;
-            }
-
-            showToast(`ليس هذا الاسم! تبقّى لك ${toArabicNumber(MAX_WRONG - wrongCount)} محاولات`, "error");
-        }
-    }
-
-    function showWin() {
-        winBanner.style.display = "flex";
-        launchConfetti();
-    }
-
-    /* كونفيتي للاحتفال */
-    function launchConfetti() {
-        const colors = ["#d4af37", "#f5efdd", "#9fdcb4", "#e8cf7a", "#14694a"];
-        for (let i = 0; i < 80; i++) {
-            const c = document.createElement("div");
-            c.className = "confetti";
-            const size = 5 + Math.random() * 9;
-            c.style.width = size + "px";
-            c.style.height = size * 0.6 + "px";
-            c.style.left = Math.random() * 100 + "vw";
-            c.style.background = colors[i % colors.length];
-            c.style.borderRadius = Math.random() > 0.5 ? "50%" : "2px";
-            c.style.animationDuration = (2.5 + Math.random() * 2.5) + "s";
-            c.style.animationDelay = (Math.random() * 1.5) + "s";
-            document.body.appendChild(c);
-            setTimeout(() => c.remove(), 7000);
-        }
-    }
-
-    function showToast(msg, type) {
-        toastMsg.innerText = msg;
-        toastMsg.className = `toast ${type}`;
-        toastMsg.style.display = "block";
-        clearTimeout(showToast._t);
-        showToast._t = setTimeout(() => { toastMsg.style.display = "none"; }, 2000);
-    }
-
-    initBank();
-    startTimer();
-</script>
-
-</body>
+  </body>
 </html>
