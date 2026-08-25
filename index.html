@@ -3,257 +3,438 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لغز نسب النبي ﷺ - التحدي الموقوت</title>
+    <title>شجرة النسب النبوي الشريف 🌿</title>
     <style>
         * {
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            user-select: none;
         }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f6;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        h1 {
+            color: #f4d03f;
+            text-shadow: 0 0 10px rgba(244, 208, 63, 0.4);
+            margin-bottom: 5px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+        p.subtitle {
+            color: #abebc6;
+            margin-top: 0;
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .game-header {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(244, 208, 63, 0.4);
+            border-radius: 15px;
+            padding: 10px 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .prize-box {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #2ecc71;
+            background: rgba(46, 204, 113, 0.15);
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid #2ecc71;
+        }
+
+        .timer-box {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #f4d03f;
+            background: rgba(244, 208, 63, 0.15);
+            padding: 8px 18px;
+            border-radius: 20px;
+            border: 1px solid #f4d03f;
+        }
+
+        .timer-box.warning {
+            color: #e74c3c;
+            border-color: #e74c3c;
+            background: rgba(231, 76, 60, 0.2);
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .tree-viewport {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            background: #ffffff;
+            border: 3px solid #27ae60;
+            border-radius: 20px;
+            padding: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 15px;
-        }
-        .container {
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 600px;
-            text-align: center;
-        }
-        h2 {
-            color: #1b4332;
-            margin-top: 0;
-            margin-bottom: 15px;
-        }
-        .timer-box {
-            font-size: 1.4rem;
-            font-weight: bold;
-            color: #d90429;
-            background-color: #ffe6e6;
-            border: 2px solid #ffb3b3;
-            padding: 10px 20px;
-            border-radius: 8px;
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-        .tree-box {
-            background-color: #e8f5e9;
-            border: 2px dashed #2d6a4f;
-            padding: 15px;
-            border-radius: 10px;
-            font-size: 1.2rem;
-            color: #2d6a4f;
-            min-height: 80px;
-            margin-bottom: 20px;
-            line-height: 1.8;
-            word-wrap: break-word;
-        }
-        .input-group {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-bottom: 15px;
-        }
-        input[type="text"] {
-            padding: 12px 15px;
-            font-size: 1rem;
-            border: 2px solid #ccc;
-            border-radius: 8px;
-            width: 65%;
-            text-align: center;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-        input[type="text"]:focus {
-            border-color: #52b788;
-        }
-        button {
-            padding: 12px 25px;
-            font-size: 1rem;
-            background-color: #2d6a4f;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #1b4332;
-        }
-        .progress {
-            background-color: #e0e0e0;
-            border-radius: 10px;
-            height: 15px;
-            width: 100%;
             overflow: hidden;
-            margin-top: 20px;
         }
-        .progress-bar {
-            background-color: #52b788;
-            height: 100%;
-            width: 0%;
-            transition: width 0.4s ease;
+
+        svg.tree-svg {
+            width: 100%;
+            height: 720px;
         }
-        .error-msg {
-            color: #d90429;
-            font-weight: bold;
-            height: 24px;
-            margin-top: 5px;
+
+        .leaf-group {
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
-        .result-msg {
-            font-size: 1.2rem;
-            font-weight: bold;
-            padding: 15px;
-            border-radius: 8px;
+
+        .leaf-path {
+            fill: #e8f8f5;
+            stroke: #27ae60;
+            stroke-width: 2;
+            transition: all 0.2s ease;
+        }
+
+        .leaf-slot-empty .leaf-path {
+            fill: #ffffff;
+            stroke: #27ae60;
+            stroke-dasharray: 4 4;
+            opacity: 0.9;
+        }
+
+        .leaf-group.drag-over .leaf-path {
+            fill: #f4d03f;
+            stroke: #d35400;
+            stroke-width: 3;
+            opacity: 1;
+            filter: drop-shadow(0 0 8px rgba(244, 208, 63, 0.8));
+        }
+
+        .leaf-group.filled .leaf-path {
+            fill: #27ae60;
+            stroke: #1e8449;
+            stroke-width: 3;
+            stroke-dasharray: none;
+            opacity: 1;
+            filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.2));
+        }
+
+        /* تكبير الحجم وتغميق الخط بالكامل */
+        .leaf-text {
+            font-size: 15px;
+            font-weight: 900;
+            fill: #ffffff;
+            text-anchor: middle;
+            dominant-baseline: middle;
+            pointer-events: none;
+        }
+
+        /* تنسيق الأرقام بدون أقواس بخط كبير وأسود بولد */
+        .leaf-text.empty-text {
+            fill: #000000;
+            font-size: 22px;
+            font-weight: 900;
+        }
+
+        .bank-container {
+            width: 100%;
+            max-width: 900px;
             margin-top: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(46, 204, 113, 0.3);
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
         }
-        .win-msg {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
+
+        .bank-title {
+            color: #f4d03f;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            font-weight: bold;
         }
-        .lose-msg {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
+
+        .names-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
         }
+
+        .leaf-btn {
+            background: linear-gradient(135deg, #27ae60, #1e8449);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            cursor: grab;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            border: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .leaf-btn:active {
+            cursor: grabbing;
+        }
+
+        .leaf-btn.dragging {
+            opacity: 0.4;
+            transform: scale(0.95);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: white;
+            display: none;
+            z-index: 100;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+        }
+        .toast.error { background-color: #e74c3c; }
+        .toast.success { background-color: #2ecc71; color: #0f2027; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>تحدي نسب النبي الشريف ﷺ (3 دقائق)</h2>
-    
-    <div class="timer-box">
-        الوقت المتبقي: <span id="timer">03:00</span>
+    <h1>شجرة النسب النبوي الشريف 🌿</h1>
+    <p class="subtitle">اسحب الاسم بالماوس وأسقطه مباشرة فوق رقم الورقة المناسبة</p>
+
+    <div class="game-header">
+        <div class="prize-box">🎁 الجائزة: 🎯 ١٠٠ جنيه</div>
+        <div class="timer-box" id="timerBox">⏳ الوقت المتبقي: ٠٣:٠٠</div>
     </div>
 
-    <div class="tree-box" id="chainBox">
-        محمد ﷺ بن ...
+    <div class="tree-viewport">
+        <svg class="tree-svg" viewBox="0 0 800 750">
+            <path d="M 200,380 C 100,350 80,180 220,100 C 300,30 500,30 580,100 C 720,180 700,350 600,380 C 500,430 300,430 200,380 Z" fill="#e8f8f5" opacity="0.7"/>
+            <path d="M 220,360 C 130,330 110,190 240,120 C 320,50 480,50 560,120 C 690,190 670,330 580,360 C 480,410 320,410 220,360 Z" fill="#d4efdf" opacity="0.6"/>
+
+            <g stroke="#795548" stroke-linecap="round" fill="none">
+                <path d="M 400,720 Q 395,580 400,450" stroke-width="42"/>
+                <path d="M 400,720 Q 405,580 400,450" stroke-width="36" stroke="#5d4037"/>
+                
+                <path d="M 400,550 Q 320,480 230,420" stroke-width="20"/>
+                <path d="M 400,550 Q 480,480 570,420" stroke-width="20"/>
+                
+                <path d="M 400,480 Q 300,380 180,300" stroke-width="14"/>
+                <path d="M 400,480 Q 500,380 620,300" stroke-width="14"/>
+
+                <path d="M 400,420 Q 340,300 250,200" stroke-width="10"/>
+                <path d="M 400,420 Q 460,300 550,200" stroke-width="10"/>
+
+                <path d="M 400,380 Q 400,240 400,100" stroke-width="12"/>
+            </g>
+
+            <g transform="translate(400, 685)">
+                <rect x="-110" y="-30" width="220" height="60" rx="30" fill="url(#goldGrad)" stroke="#ffffff" stroke-width="2" filter="drop-shadow(0 4px 8px rgba(0,0,0,0.3))"/>
+                <text x="0" y="5" font-size="20" font-weight="bold" fill="#0f2027" text-anchor="middle">سيدنا محمد ﷺ</text>
+            </g>
+
+            <defs>
+                <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#f4d03f" />
+                    <stop offset="100%" stop-color="#f39c12" />
+                </linearGradient>
+            </defs>
+
+            <g id="leavesContainer"></g>
+        </svg>
     </div>
 
-    <div class="input-group" id="controls">
-        <input type="text" id="userInput" placeholder="اكتب الاسم هنا" autofocus autocomplete="off">
-        <button onclick="checkAnswer()">تأكيد</button>
+    <div class="bank-container">
+        <div class="bank-title">🌿 اسحب اسم الأب بالماوس وضع الكرسر فوق رقم الورقة:</div>
+        <div class="names-flex" id="namesBank"></div>
     </div>
 
-    <div class="error-msg" id="errorMsg"></div>
-
-    <div class="progress">
-        <div class="progress-bar" id="progressBar"></div>
-    </div>
-    
-    <div id="finalMessage"></div>
-</div>
+    <div class="toast" id="toastMsg"></div>
 
 <script>
-    // شجرة النسب المتفق عليها إلى عدنان
-    const ancestry = [
+    const ancestryTree = [
         "عبد الله", "عبد المطلب", "هاشم", "عبد مناف", "قصي", 
         "كلاب", "مرة", "كعب", "لؤي", "غالب", 
         "فهر", "مالك", "النضر", "كنانة", "خزيمة", 
         "مدركة", "إلياس", "مضر", "نزار", "معد", "عدنان"
     ];
 
-    let currentIndex = 0;
-    let timeLeft = 180; // 3 دقائق = 180 ثانية
+    const arabicDigits = ["٠", "١", "٢", "٣", "٤", "٥", "٦", "٧", "٨", "٩"];
+
+    // تحويل مباشر للرقم العربي بدون إضافة صفر
+    function toArabicNumber(num) {
+        return num.toString().replace(/\d/g, d => arabicDigits[d]);
+    }
+
+    const leafPositions = [
+        {x: 400, y: 600}, {x: 320, y: 530}, {x: 480, y: 530}, {x: 230, y: 450}, {x: 570, y: 450},
+        {x: 390, y: 470}, {x: 300, y: 390}, {x: 500, y: 390}, {x: 180, y: 320}, {x: 620, y: 320},
+        {x: 400, y: 360}, {x: 320, y: 290}, {x: 480, y: 290}, {x: 230, y: 220}, {x: 570, y: 220},
+        {x: 400, y: 250}, {x: 330, y: 160}, {x: 470, y: 160}, {x: 400, y: 150}, {x: 320, y: 80}, {x: 480, y: 80}
+    ];
+
+    let draggedName = null;
+    let draggedElement = null;
+    let completedCount = 0;
+    let totalSeconds = 180;
     let timerInterval = null;
+    let isGameOver = false;
 
-    // دالة بدء العداد التنازلي
+    const leavesContainer = document.getElementById("leavesContainer");
+    const namesBank = document.getElementById("namesBank");
+    const toastMsg = document.getElementById("toastMsg");
+    const timerBox = document.getElementById("timerBox");
+    const leafShapePath = "M 0,-25 C 20,-15 25,10 0,25 C -25,10 -20,-15 0,-25 Z";
+
     function startTimer() {
-        timerInterval = setInterval(function() {
-            timeLeft--;
-            
-            let minutes = Math.floor(timeLeft / 60);
-            let seconds = timeLeft % 60;
-            
-            // إضافة صفر على اليسار إذا كان الأرقام أقل من 10
-            let displayMinutes = minutes < 10 ? "0" + minutes : minutes;
-            let displaySeconds = seconds < 10 ? "0" + seconds : seconds;
-            
-            document.getElementById("timer").innerText = displayMinutes + ":" + displaySeconds;
-
-            if (timeLeft <= 0) {
+        timerInterval = setInterval(() => {
+            if (totalSeconds <= 0) {
                 clearInterval(timerInterval);
-                timeOut();
+                isGameOver = true;
+                timerBox.innerText = "⏳ انتهى الوقت!";
+                showToast("انتهى الوقت للأسف! حاول مرة أخرى ⏱️", "error");
+                setTimeout(() => alert("❌ انتهت الـ 3 دقائق! حاول مرة أخرى للحصول على الجائزة ١٠٠ جنيه!"), 300);
+                return;
+            }
+
+            totalSeconds--;
+            const mins = Math.floor(totalSeconds / 60);
+            const secs = totalSeconds % 60;
+            
+            timerBox.innerText = `⏳ الوقت المتبقي: ${toArabicNumber(mins)}:${secs < 10 ? '٠' + toArabicNumber(secs) : toArabicNumber(secs)}`;
+
+            if (totalSeconds <= 30) {
+                timerBox.classList.add("warning");
             }
         }, 1000);
     }
 
-    // انتهاء الوقت
-    function timeOut() {
-        document.getElementById("controls").style.display = "none";
-        document.getElementById("errorMsg").innerText = "";
-        document.getElementById("finalMessage").innerHTML = 
-            "<div class='result-msg lose-msg'>للأسف انتهى الوقت! حاول مرة أخرى في وقت لاحق.</div>";
+    function initTreeLeaves() {
+        ancestryTree.forEach((name, index) => {
+            const pos = leafPositions[index];
+
+            const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+            g.setAttribute("class", "leaf-group leaf-slot-empty");
+            g.setAttribute("transform", `translate(${pos.x}, ${pos.y})`);
+            g.setAttribute("data-index", index);
+
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute("d", leafShapePath);
+            path.setAttribute("class", "leaf-path");
+            path.setAttribute("transform", "scale(2.2, 1.4)");
+
+            const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            text.setAttribute("class", "leaf-text empty-text");
+            text.setAttribute("y", "2");
+            // الرقم العربي فقط بدون أقواس أو أصفار زادت
+            text.textContent = toArabicNumber(index + 1);
+
+            g.appendChild(path);
+            g.appendChild(text);
+
+            g.addEventListener("dragover", (e) => {
+                e.preventDefault();
+                if (!g.classList.contains("filled")) {
+                    g.classList.add("drag-over");
+                }
+            });
+
+            g.addEventListener("dragleave", () => {
+                g.classList.remove("drag-over");
+            });
+
+            g.addEventListener("drop", (e) => {
+                e.preventDefault();
+                g.classList.remove("drag-over");
+                handleDrop(index, g);
+            });
+
+            leavesContainer.appendChild(g);
+        });
     }
 
-    // دالة لتسهيل مقارنة النصوص وتجاهل الهمزات والمسافات الزائدة
-    function normalize(text) {
-        return text.trim()
-            .replace(/[أإآ]/g, "ا")
-            .replace(/\s+/g, " ");
+    function initBank() {
+        const shuffled = [...ancestryTree].sort(() => Math.random() - 0.5);
+        shuffled.forEach(name => {
+            const btn = document.createElement("div");
+            btn.className = "leaf-btn";
+            btn.innerText = name;
+            btn.setAttribute("draggable", "true");
+
+            btn.addEventListener("dragstart", (e) => {
+                if (isGameOver) return;
+                draggedName = name;
+                draggedElement = btn;
+                btn.classList.add("dragging");
+                e.dataTransfer.setData("text/plain", name);
+            });
+
+            btn.addEventListener("dragend", () => {
+                btn.classList.remove("dragging");
+            });
+
+            namesBank.appendChild(btn);
+        });
     }
 
-    function checkAnswer() {
-        if (timeLeft <= 0) return;
+    function handleDrop(slotIndex, leafElement) {
+        if (isGameOver || !draggedName) return;
 
-        const inputElem = document.getElementById("userInput");
-        const errorElem = document.getElementById("errorMsg");
-        const userValue = normalize(inputElem.value);
-        const correctValue = normalize(ancestry[currentIndex]);
+        if (leafElement.classList.contains("filled")) return;
 
-        if (userValue === "") return;
+        if (draggedName === ancestryTree[slotIndex]) {
+            leafElement.setAttribute("class", "leaf-group filled");
+            const textNode = leafElement.querySelector(".leaf-text");
+            textNode.textContent = "بن " + draggedName;
+            textNode.setAttribute("class", "leaf-text");
 
-        if (userValue === correctValue) {
-            errorElem.innerText = "";
-            const currentChain = document.getElementById("chainBox");
-            
-            // إضافة الاسم الصحيح للشجرة
-            currentChain.innerText = currentChain.innerText.replace("...", ancestry[currentIndex]);
-            
-            currentIndex++;
+            draggedElement.remove();
+            draggedName = null;
+            draggedElement = null;
+            showToast("إجابة صحيحة! 🌿", "success");
 
-            // تحديث شريط التقدم
-            const progressPercent = (currentIndex / ancestry.length) * 100;
-            document.getElementById("progressBar").style.width = progressPercent + "%";
-
-            if (currentIndex < ancestry.length) {
-                currentChain.innerText += " بن ...";
-                inputElem.value = "";
-                inputElem.focus();
-            } else {
-                // الفوز بالطريقة الصحيحة
+            completedCount++;
+            if (completedCount === ancestryTree.length) {
                 clearInterval(timerInterval);
-                currentChain.innerText += " (وصلت إلى عدنان)";
-                document.getElementById("controls").style.display = "none";
-                document.getElementById("finalMessage").innerHTML = 
-                    "<div class='result-msg win-msg'>🎉 مبروك كسبت ١٠٠ جنيه مكافأة على حفظك لنسب نبيك صلى الله عليه وسلم! 🎉</div>";
+                setTimeout(() => {
+                    alert("🎉 ألف مبروك! نجحت في ترتيب شجرة النسب الشريف قبل انتهاء الوقت وتستحق الجائزة ١٠٠ جنيه! 🏆");
+                }, 300);
             }
         } else {
-            // إجابة خاطئة: مسح التكست وإظهار الرسالة
-            errorElem.innerText = "إجابة خاطئة! حاول مرة أخرى.";
-            inputElem.value = "";
-            inputElem.focus();
+            showToast("مكان خاطئ! جرب ورقة أخرى.", "error");
         }
     }
 
-    // السماح بالضغط على زر Enter للإرسال
-    document.getElementById("userInput").addEventListener("keypress", function(event) {
-        if (event.key === "Enter") {
-            checkAnswer();
-        }
-    });
+    function showToast(msg, type) {
+        toastMsg.innerText = msg;
+        toastMsg.className = `toast ${type}`;
+        toastMsg.style.display = "block";
+        setTimeout(() => { toastMsg.style.display = "none"; }, 2000);
+    }
 
-    // تشغيل العداد عند فتح الصفحة
-    window.onload = startTimer;
+    initTreeLeaves();
+    initBank();
+    startTimer();
 </script>
 
 </body>
