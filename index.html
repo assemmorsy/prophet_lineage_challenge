@@ -3,308 +3,500 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>شجرة النسب النبوي الشريف 🌿</title>
+    <title>مسابقة النسب النبوي الشريف ﷺ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Cairo', Tahoma, sans-serif;
             user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
+
+        :root {
+            --gold: #d4af37;
+            --gold-soft: #e8cf7a;
+            --emerald: #0b3d2e;
+            --emerald-light: #14694a;
+            --cream: #f5efdd;
+            --ink: #06231a;
+        }
+
         body {
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-            color: #ffffff;
+            background-color: var(--ink);
+            /* زخرفة إسلامية هندسية خفيفة */
+            background-image:
+                linear-gradient(180deg, rgba(6,35,26,0.92), rgba(11,61,46,0.95)),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23d4af37' stroke-width='1' opacity='0.35'%3E%3Cpath d='M40 8 L48 32 L72 40 L48 48 L40 72 L32 48 L8 40 L32 32 Z'/%3E%3Ccircle cx='40' cy='40' r='10'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: auto, 80px 80px;
+            color: var(--cream);
             margin: 0;
-            padding: 15px;
+            padding: 14px 14px 40px;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
         }
-        h1 {
-            color: #f4d03f;
-            text-shadow: 0 0 10px rgba(244, 208, 63, 0.4);
-            margin: 0 0 5px 0;
+
+        /* ===== الترويسة ===== */
+        header {
             text-align: center;
-            font-size: 1.8rem;
+            margin-bottom: 14px;
+            width: 100%;
+            max-width: 950px;
+        }
+        .bismillah {
+            color: var(--gold-soft);
+            font-family: 'Amiri', serif;
+            font-size: 1.05rem;
+            opacity: 0.9;
+            margin: 0;
+        }
+        h1 {
+            color: var(--gold);
+            font-family: 'Amiri', serif;
+            font-weight: 700;
+            text-shadow: 0 2px 12px rgba(212, 175, 55, 0.35);
+            margin: 2px 0 4px;
+            font-size: clamp(1.5rem, 4.5vw, 2.2rem);
+        }
+        .title-rule {
+            width: 220px;
+            max-width: 60%;
+            height: 2px;
+            margin: 4px auto 8px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            position: relative;
+        }
+        .title-rule::after {
+            content: "✦";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--gold);
+            background: transparent;
+            font-size: 0.9rem;
         }
         p.subtitle {
-            color: #abebc6;
-            margin-top: 0;
-            margin-bottom: 10px;
-            text-align: center;
-            font-size: 0.95rem;
+            color: #bcd8c6;
+            margin: 0;
+            font-size: clamp(0.85rem, 2.5vw, 1rem);
         }
 
+        /* ===== شريط الجائزة والعداد ===== */
         .game-header {
             width: 100%;
-            max-width: 1100px;
+            max-width: 950px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(244, 208, 63, 0.4);
-            border-radius: 15px;
-            padding: 10px 20px;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            gap: 8px;
+            flex-wrap: wrap;
+            background: rgba(245, 239, 221, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.45);
+            border-radius: 16px;
+            padding: 10px 16px;
+            margin-bottom: 14px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.35);
         }
-
+        .prize-box, .stars-box, .timer-box, .wrong-box {
+            font-size: clamp(0.85rem, 2.4vw, 1.05rem);
+            font-weight: 700;
+            padding: 7px 14px;
+            border-radius: 12px;
+            white-space: nowrap;
+        }
         .prize-box {
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: #2ecc71;
-            background: rgba(46, 204, 113, 0.15);
-            padding: 8px 15px;
-            border-radius: 20px;
-            border: 1px solid #2ecc71;
+            color: var(--gold-soft);
+            border: 1px solid var(--gold);
+            background: rgba(212, 175, 55, 0.1);
         }
-
-        .timer-box {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #f4d03f;
-            background: rgba(244, 208, 63, 0.15);
-            padding: 8px 18px;
-            border-radius: 20px;
-            border: 1px solid #f4d03f;
+        .stars-box {
+            color: #9fdcb4;
+            border: 1px solid #3d8b63;
+            background: rgba(61, 139, 99, 0.12);
         }
-
-        .timer-box.warning {
-            color: #e74c3c;
-            border-color: #e74c3c;
-            background: rgba(231, 76, 60, 0.2);
-            animation: pulse 1s infinite;
+        .wrong-box {
+            color: #ff8f8f;
+            border: 1px solid #a93226;
+            background: rgba(192, 57, 43, 0.12);
         }
-
-        @keyframes pulse {
+        .wrong-box.bump {
+            animation: bump 0.4s ease;
+        }
+        @keyframes bump {
             0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            40% { transform: scale(1.15); background: rgba(192, 57, 43, 0.35); }
             100% { transform: scale(1); }
         }
+        .timer-box {
+            color: var(--gold-soft);
+            border: 1px solid var(--gold);
+            background: rgba(212, 175, 55, 0.1);
+            font-variant-numeric: tabular-nums;
+        }
+        .timer-box.warning {
+            color: #ff8f8f;
+            border-color: #c0392b;
+            background: rgba(192, 57, 43, 0.18);
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
 
-        /* تخطيط الصفحة: بنك اليمين - الشجرة في المنتصف - بنك اليسار */
-        .main-layout {
-            display: flex;
+        /* ===== شريط السلسلة: الأسماء متجاورة وبينها "بن" ===== */
+        .chain-panel {
             width: 100%;
-            max-width: 1200px;
-            gap: 15px;
-            align-items: flex-start;
-            justify-content: center;
-        }
-
-        .side-bank {
-            flex: 1;
-            max-width: 180px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(46, 204, 113, 0.3);
-            border-radius: 15px;
-            padding: 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            min-height: 600px;
-            align-items: center;
-        }
-
-        .tree-viewport {
-            flex: 2;
+            max-width: 950px;
+            background: linear-gradient(160deg, rgba(245,239,221,0.08), rgba(245,239,221,0.03));
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            border-radius: 18px;
+            padding: 16px 14px;
+            margin-bottom: 14px;
+            box-shadow: inset 0 0 26px rgba(0,0,0,0.3), 0 6px 16px rgba(0,0,0,0.3);
             position: relative;
-            background: #ffffff;
-            border: 3px solid #27ae60;
-            border-radius: 20px;
-            padding: 5px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
         }
-
-        svg.tree-svg {
-            width: 100%;
-            height: 700px;
-        }
-
-        .leaf-group {
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .leaf-path {
-            fill: #e8f8f5;
-            stroke: #27ae60;
-            stroke-width: 2;
-            transition: all 0.2s ease;
-        }
-
-        .leaf-slot-empty .leaf-path {
-            fill: #ffffff;
-            stroke: #27ae60;
-            stroke-dasharray: 4 4;
-            opacity: 0.9;
-        }
-
-        .leaf-group.drag-over .leaf-path {
-            fill: #f4d03f;
-            stroke: #d35400;
-            stroke-width: 3;
-            opacity: 1;
-            filter: drop-shadow(0 0 8px rgba(244, 208, 63, 0.8));
-        }
-
-        .leaf-group.filled .leaf-path {
-            fill: #27ae60;
-            stroke: #1e8449;
-            stroke-width: 3;
-            stroke-dasharray: none;
-            opacity: 1;
-            filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.2));
-        }
-
-        .leaf-text {
-            font-size: 15px;
-            font-weight: 900;
-            fill: #ffffff;
-            text-anchor: middle;
-            dominant-baseline: middle;
+        /* إطار مزخرف بزوايا */
+        .chain-panel::before {
+            content: "";
+            position: absolute;
+            inset: 6px;
+            border: 1px solid rgba(212, 175, 55, 0.18);
+            border-radius: 12px;
             pointer-events: none;
         }
-
-        .leaf-text.empty-text {
-            fill: #000000;
-            font-size: 22px;
-            font-weight: 900;
-        }
-
-        .leaf-btn {
-            width: 100%;
+        .chain-title {
+            color: var(--gold);
+            font-family: 'Amiri', serif;
+            font-weight: 700;
+            font-size: clamp(0.95rem, 2.6vw, 1.1rem);
+            margin-bottom: 12px;
             text-align: center;
-            background: linear-gradient(135deg, #27ae60, #1e8449);
-            color: white;
-            padding: 8px 10px;
-            border-radius: 15px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            cursor: grab;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-            border: 2px solid transparent;
-            transition: all 0.2s ease;
+        }
+        .chain-flow {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px 6px;
+            justify-content: center;
+        }
+        .chain-chip {
+            background: linear-gradient(160deg, #14694a, #0b3d2e);
+            border: 1px solid var(--gold);
+            color: var(--cream);
+            font-family: 'Amiri', serif;
+            font-weight: 700;
+            font-size: clamp(0.95rem, 3vw, 1.2rem);
+            padding: 4px 16px;
+            border-radius: 8px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.35);
+            animation: chipPop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .chain-chip.prophet {
+            background: linear-gradient(160deg, var(--gold), #b8942a);
+            border-color: var(--gold-soft);
+            color: #2e2405;
+        }
+        .chain-connector {
+            color: var(--gold);
+            font-family: 'Amiri', serif;
+            font-weight: 700;
+            font-size: clamp(0.9rem, 2.6vw, 1.1rem);
+        }
+        .chain-slot {
+            min-width: 64px;
+            text-align: center;
+            border: 2px dashed var(--gold);
+            color: var(--gold);
+            font-weight: 700;
+            font-size: clamp(1rem, 3vw, 1.25rem);
+            padding: 4px 16px;
+            border-radius: 8px;
+            background: rgba(212, 175, 55, 0.07);
+            animation: slotGlow 1.6s infinite ease-in-out;
+        }
+        @keyframes slotGlow {
+            0%, 100% { box-shadow: 0 0 3px rgba(212,175,55,0.25); opacity: 0.7; }
+            50% { box-shadow: 0 0 14px rgba(212,175,55,0.6); opacity: 1; }
+        }
+        .chain-slot.shake {
+            animation: shake 0.5s;
+            border-color: #e74c3c;
+            color: #ff8f8f;
+        }
+        @keyframes chipPop {
+            0% { transform: scale(0.3) translateY(-8px); opacity: 0; }
+            70% { transform: scale(1.12) translateY(1px); }
+            100% { transform: scale(1) translateY(0); opacity: 1; }
         }
 
-        .leaf-btn:active {
-            cursor: grabbing;
+        /* ===== منطقة اختيار الأسماء ===== */
+        .bank-panel {
+            width: 100%;
+            max-width: 950px;
+            background: rgba(245, 239, 221, 0.04);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 18px;
+            padding: 14px;
+            text-align: center;
+        }
+        .bank-title {
+            color: #bcd8c6;
+            font-size: clamp(0.85rem, 2.4vw, 1rem);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .names-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+        .name-btn {
+            background: linear-gradient(160deg, #14694a, #0b3d2e);
+            color: var(--cream);
+            font-family: 'Amiri', serif;
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: clamp(0.95rem, 3vw, 1.15rem);
+            cursor: pointer;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.35);
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+            touch-action: manipulation;
+        }
+        .name-btn:hover {
+            transform: translateY(-2px);
+            border-color: var(--gold);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.45);
+        }
+        .name-btn:active { transform: translateY(0) scale(0.97); }
+        .name-btn.used {
+            opacity: 0.22;
+            pointer-events: none;
+            filter: grayscale(0.7);
+        }
+        .name-btn.wrong {
+            animation: shake 0.5s;
+            border-color: #e74c3c;
+            box-shadow: 0 0 14px rgba(231, 76, 60, 0.7);
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-9px); }
+            40% { transform: translateX(9px); }
+            60% { transform: translateX(-6px); }
+            80% { transform: translateX(6px); }
         }
 
-        .leaf-btn.dragging {
-            opacity: 0.4;
-            transform: scale(0.95);
+        /* ===== شريط التقدم ===== */
+        .progress-track {
+            width: 100%;
+            max-width: 950px;
+            height: 12px;
+            background: rgba(245,239,221,0.1);
+            border-radius: 8px;
+            margin-top: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(212,175,55,0.3);
+        }
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: 8px;
+            background: linear-gradient(90deg, #b8942a, var(--gold), #9fdcb4);
+            transition: width 0.5s ease;
+        }
+
+        /* ===== رسالة الفوز والكونفيتي ===== */
+        .win-banner {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(4, 20, 14, 0.88);
+            z-index: 50;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 20px;
+        }
+        .win-card {
+            background: linear-gradient(160deg, #0b3d2e, #06231a);
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            padding: 32px 28px;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.35);
+            animation: chipPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            max-width: 520px;
+            width: 100%;
+        }
+        .win-card h2 {
+            color: var(--gold);
+            font-family: 'Amiri', serif;
+            font-size: clamp(1.4rem, 5vw, 1.9rem);
+            margin: 0 0 10px;
+        }
+        .win-card p {
+            color: #bcd8c6;
+            font-size: clamp(0.95rem, 3vw, 1.15rem);
+            margin: 0 0 20px;
+            line-height: 1.9;
+        }
+        .win-card button {
+            background: linear-gradient(160deg, var(--gold), #b8942a);
+            color: #2e2405;
+            border: none;
+            padding: 12px 34px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .win-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .win-card button.secondary {
+            background: transparent;
+            color: var(--gold-soft);
+            border: 1px solid var(--gold);
+        }
+        .confetti {
+            position: fixed;
+            top: -20px;
+            z-index: 60;
+            pointer-events: none;
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(720deg); opacity: 0.7; }
         }
 
         .toast {
             position: fixed;
-            bottom: 20px;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-weight: bold;
+            bottom: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 24px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: clamp(0.85rem, 2.6vw, 1rem);
             color: white;
             display: none;
             z-index: 100;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+            max-width: 90vw;
+            text-align: center;
         }
-        .toast.error { background-color: #e74c3c; }
-        .toast.success { background-color: #2ecc71; color: #0f2027; }
+        .toast.error { background-color: #a93226; border: 1px solid #e74c3c; }
+        .toast.success { background-color: #d5f5e3; color: #0b3d2e; border: 1px solid #3d8b63; }
+
+        /* ===== تجاوب الجوال ===== */
+        @media (max-width: 640px) {
+            body { padding: 10px 10px 30px; }
+            .game-header { justify-content: center; padding: 8px 10px; }
+            .chain-panel, .bank-panel { padding: 12px 10px; }
+            .name-btn { padding: 8px 14px; }
+            .chain-chip { padding: 4px 12px; }
+            .chain-slot { min-width: 52px; padding: 4px 12px; }
+        }
     </style>
 </head>
 <body>
 
-    <h1>شجرة النسب النبوي الشريف 🌿</h1>
-    <p class="subtitle">اسحب الاسم من القائمتين الجانبيتين وأسقطه فوق رقم الورقة المناسبة</p>
+    <header>
+        <p class="bismillah">بسم الله الرحمن الرحيم</p>
+        <h1>مسابقة النسب النبوي الشريف ﷺ</h1>
+        <div class="title-rule"></div>
+        <p class="subtitle">اختر الاسم الصحيح بالترتيب لتكمل سلسلة النسب المطهّر حتى عدنان</p>
+    </header>
 
     <div class="game-header">
-        <div class="prize-box">🎁 الجائزة: 🎯 ١٠٠ جنيه</div>
+        <div class="prize-box">🎁 الجائزة: ١٠٠ جنيه</div>
+        <div class="stars-box" id="starsBox">✦ الأسماء الصحيحة: ٠ / ٢١</div>
+        <div class="wrong-box" id="wrongBox">✖ المحاولات الخاطئة: ٠</div>
         <div class="timer-box" id="timerBox">⏳ الوقت المتبقي: ٠٣:٠٠</div>
     </div>
 
-    <!-- التخطيط الثلاثي: بنك يمين + شجرة + بنك يسار -->
-    <div class="main-layout">
-        <div class="side-bank" id="bankRight"></div>
-
-        <div class="tree-viewport">
-            <svg class="tree-svg" viewBox="0 0 800 750">
-                <path d="M 200,380 C 100,350 80,180 220,100 C 300,30 500,30 580,100 C 720,180 700,350 600,380 C 500,430 300,430 200,380 Z" fill="#e8f8f5" opacity="0.7"/>
-                <path d="M 220,360 C 130,330 110,190 240,120 C 320,50 480,50 560,120 C 690,190 670,330 580,360 C 480,410 320,410 220,360 Z" fill="#d4efdf" opacity="0.6"/>
-
-                <g stroke="#795548" stroke-linecap="round" fill="none">
-                    <path d="M 400,720 Q 395,580 400,450" stroke-width="42"/>
-                    <path d="M 400,720 Q 405,580 400,450" stroke-width="36" stroke="#5d4037"/>
-                    
-                    <path d="M 400,550 Q 320,480 230,420" stroke-width="20"/>
-                    <path d="M 400,550 Q 480,480 570,420" stroke-width="20"/>
-                    
-                    <path d="M 400,480 Q 300,380 180,300" stroke-width="14"/>
-                    <path d="M 400,480 Q 500,380 620,300" stroke-width="14"/>
-
-                    <path d="M 400,420 Q 340,300 250,200" stroke-width="10"/>
-                    <path d="M 400,420 Q 460,300 550,200" stroke-width="10"/>
-
-                    <path d="M 400,380 Q 400,240 400,100" stroke-width="12"/>
-                </g>
-
-                <g transform="translate(400, 685)">
-                    <rect x="-110" y="-30" width="220" height="60" rx="30" fill="url(#goldGrad)" stroke="#ffffff" stroke-width="2" filter="drop-shadow(0 4px 8px rgba(0,0,0,0.3))"/>
-                    <text x="0" y="5" font-size="20" font-weight="bold" fill="#0f2027" text-anchor="middle">سيدنا محمد ﷺ</text>
-                </g>
-
-                <defs>
-                    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#f4d03f" />
-                        <stop offset="100%" stop-color="#f39c12" />
-                    </linearGradient>
-                </defs>
-
-                <g id="leavesContainer"></g>
-            </svg>
+    <!-- سلسلة النسب: الأسماء متجاورة وبينها "بن" -->
+    <div class="chain-panel">
+        <div class="chain-title">سلسلة النسب الشريف</div>
+        <div class="chain-flow" id="chainFlow">
+            <span class="chain-chip prophet">سيدنا محمد ﷺ</span>
+            <span class="chain-connector">بن</span>
+            <span class="chain-slot" id="nextSlot">؟</span>
         </div>
+    </div>
 
-        <div class="side-bank" id="bankLeft"></div>
+    <!-- منطقة اختيار الأسماء -->
+    <div class="bank-panel">
+        <div class="bank-title">اضغط على اسم الأب التالي في النسب:</div>
+        <div class="names-flex" id="namesBank"></div>
+    </div>
+
+    <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <!-- شاشة الفوز -->
+    <div class="win-banner" id="winBanner">
+        <div class="win-card">
+            <h2>ما شاء الله، أحسنت!</h2>
+            <p>أكملت سلسلة نسب النبي ﷺ كاملة قبل انتهاء الوقت<br>وتستحق جائزة الـ ١٠٠ جنيه</p>
+            <button onclick="location.reload()">العب مرة أخرى</button>
+        </div>
+    </div>
+
+    <!-- شاشة انتهاء الوقت -->
+    <div class="win-banner" id="timeoutBanner">
+        <div class="win-card">
+            <h2>انتهى الوقت ⏳</h2>
+            <p>هل تريد البدء من جديد أم استكمال ما وصلت إليه<br>بثلاث دقائق إضافية؟</p>
+            <div class="win-actions">
+                <button onclick="resumeGame()">استكمال ▶</button>
+                <button class="secondary" onclick="location.reload()">محاولة أخرى 🔁</button>
+            </div>
+        </div>
     </div>
 
     <div class="toast" id="toastMsg"></div>
 
 <script>
-    const ancestryTree = [
-        "عبد الله", "عبد المطلب", "هاشم", "عبد مناف", "قصي", 
-        "كلاب", "مرة", "كعب", "لؤي", "غالب", 
-        "فهر", "مالك", "النضر", "كنانة", "خزيمة", 
+    const ancestry = [
+        "عبد الله", "عبد المطلب", "هاشم", "عبد مناف", "قصي",
+        "كلاب", "مرة", "كعب", "لؤي", "غالب",
+        "فهر", "مالك", "النضر", "كنانة", "خزيمة",
         "مدركة", "إلياس", "مضر", "نزار", "معد", "عدنان"
     ];
 
     const arabicDigits = ["٠", "١", "٢", "٣", "٤", "٥", "٦", "٧", "٨", "٩"];
-
     function toArabicNumber(num) {
         return num.toString().replace(/\d/g, d => arabicDigits[d]);
     }
 
-    const leafPositions = [
-        {x: 400, y: 600}, {x: 320, y: 530}, {x: 480, y: 530}, {x: 230, y: 450}, {x: 570, y: 450},
-        {x: 390, y: 470}, {x: 300, y: 390}, {x: 500, y: 390}, {x: 180, y: 320}, {x: 620, y: 320},
-        {x: 400, y: 360}, {x: 320, y: 290}, {x: 480, y: 290}, {x: 230, y: 220}, {x: 570, y: 220},
-        {x: 400, y: 250}, {x: 330, y: 160}, {x: 470, y: 160}, {x: 400, y: 150}, {x: 320, y: 80}, {x: 480, y: 80}
-    ];
-
-    let draggedName = null;
-    let draggedElement = null;
-    let completedCount = 0;
+    let currentIndex = 0;
+    let wrongCount = 0;
     let totalSeconds = 180;
     let timerInterval = null;
     let isGameOver = false;
 
-    const leavesContainer = document.getElementById("leavesContainer");
-    const bankRight = document.getElementById("bankRight");
-    const bankLeft = document.getElementById("bankLeft");
+    const chainFlow = document.getElementById("chainFlow");
+    const nextSlot = document.getElementById("nextSlot");
+    const namesBank = document.getElementById("namesBank");
+    const starsBox = document.getElementById("starsBox");
+    const wrongBox = document.getElementById("wrongBox");
+    const progressFill = document.getElementById("progressFill");
     const toastMsg = document.getElementById("toastMsg");
     const timerBox = document.getElementById("timerBox");
-    const leafShapePath = "M 0,-25 C 20,-15 25,10 0,25 C -25,10 -20,-15 0,-25 Z";
+    const winBanner = document.getElementById("winBanner");
 
     function startTimer() {
         timerInterval = setInterval(() => {
@@ -312,121 +504,109 @@
                 clearInterval(timerInterval);
                 isGameOver = true;
                 timerBox.innerText = "⏳ انتهى الوقت!";
-                showToast("انتهى الوقت للأسف! حاول مرة أخرى ⏱️", "error");
-                setTimeout(() => alert("❌ انتهت الـ 3 دقائق! حاول مرة أخرى للحصول على الجائزة ١٠٠ جنيه!"), 300);
+                showTimeout();
                 return;
             }
-
             totalSeconds--;
             const mins = Math.floor(totalSeconds / 60);
             const secs = totalSeconds % 60;
-            
             timerBox.innerText = `⏳ الوقت المتبقي: ${toArabicNumber(mins)}:${secs < 10 ? '٠' + toArabicNumber(secs) : toArabicNumber(secs)}`;
-
-            if (totalSeconds <= 30) {
-                timerBox.classList.add("warning");
-            }
+            if (totalSeconds <= 30) timerBox.classList.add("warning");
         }, 1000);
     }
 
-    function initTreeLeaves() {
-        ancestryTree.forEach((name, index) => {
-            const pos = leafPositions[index];
-
-            const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
-            g.setAttribute("class", "leaf-group leaf-slot-empty");
-            g.setAttribute("transform", `translate(${pos.x}, ${pos.y})`);
-            g.setAttribute("data-index", index);
-
-            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-            path.setAttribute("d", leafShapePath);
-            path.setAttribute("class", "leaf-path");
-            path.setAttribute("transform", "scale(2.2, 1.4)");
-
-            const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-            text.setAttribute("class", "leaf-text empty-text");
-            text.setAttribute("y", "2");
-            text.textContent = toArabicNumber(index + 1);
-
-            g.appendChild(path);
-            g.appendChild(text);
-
-            g.addEventListener("dragover", (e) => {
-                e.preventDefault();
-                if (!g.classList.contains("filled")) {
-                    g.classList.add("drag-over");
-                }
-            });
-
-            g.addEventListener("dragleave", () => {
-                g.classList.remove("drag-over");
-            });
-
-            g.addEventListener("drop", (e) => {
-                e.preventDefault();
-                g.classList.remove("drag-over");
-                handleDrop(index, g);
-            });
-
-            leavesContainer.appendChild(g);
-        });
+    /* عند انتهاء الوقت: محاولة أخرى أو استكمال بثلاث دقائق جديدة */
+    function showTimeout() {
+        document.getElementById("timeoutBanner").style.display = "flex";
     }
 
-    // توزيع الأسماء بالتساوي على العمودين الأيمن والأيسر
+    function resumeGame() {
+        document.getElementById("timeoutBanner").style.display = "none";
+        totalSeconds = 180;
+        isGameOver = false;
+        timerBox.classList.remove("warning");
+        startTimer();
+    }
+
+    /* بناء أزرار الاختيار */
     function initBank() {
-        const shuffled = [...ancestryTree].sort(() => Math.random() - 0.5);
-        shuffled.forEach((name, idx) => {
+        const shuffled = [...ancestry].sort(() => Math.random() - 0.5);
+        shuffled.forEach(name => {
             const btn = document.createElement("div");
-            btn.className = "leaf-btn";
+            btn.className = "name-btn";
             btn.innerText = name;
-            btn.setAttribute("draggable", "true");
-
-            btn.addEventListener("dragstart", (e) => {
-                if (isGameOver) return;
-                draggedName = name;
-                draggedElement = btn;
-                btn.classList.add("dragging");
-                e.dataTransfer.setData("text/plain", name);
-            });
-
-            btn.addEventListener("dragend", () => {
-                btn.classList.remove("dragging");
-            });
-
-            // إضافة النصف في اليمين والنصف في اليسار
-            if (idx % 2 === 0) {
-                bankRight.appendChild(btn);
-            } else {
-                bankLeft.appendChild(btn);
-            }
+            btn.addEventListener("click", () => handlePick(name, btn));
+            namesBank.appendChild(btn);
         });
     }
 
-    function handleDrop(slotIndex, leafElement) {
-        if (isGameOver || !draggedName) return;
+    /* الضغط على اسم: يذهب مباشرة لمكانه التالي إن كان صحيحاً */
+    function handlePick(name, btn) {
+        if (isGameOver || btn.classList.contains("used")) return;
 
-        if (leafElement.classList.contains("filled")) return;
+        if (name === ancestry[currentIndex]) {
+            const chip = document.createElement("span");
+            chip.className = "chain-chip";
+            chip.innerText = name;
 
-        if (draggedName === ancestryTree[slotIndex]) {
-            leafElement.setAttribute("class", "leaf-group filled");
-            const textNode = leafElement.querySelector(".leaf-text");
-            textNode.textContent = "بن " + draggedName;
-            textNode.setAttribute("class", "leaf-text");
+            const connector = document.createElement("span");
+            connector.className = "chain-connector";
+            connector.innerText = "بن";
 
-            draggedElement.remove();
-            draggedName = null;
-            draggedElement = null;
-            showToast("إجابة صحيحة! 🌿", "success");
+            chainFlow.insertBefore(chip, nextSlot);
+            chainFlow.insertBefore(connector, nextSlot);
 
-            completedCount++;
-            if (completedCount === ancestryTree.length) {
+            btn.classList.add("used");
+            currentIndex++;
+
+            starsBox.innerText = `✦ الأسماء الصحيحة: ${toArabicNumber(currentIndex)} / ${toArabicNumber(ancestry.length)}`;
+            progressFill.style.width = (currentIndex / ancestry.length * 100) + "%";
+
+            showToast("إجابة صحيحة، أحسنت", "success");
+
+            if (currentIndex === ancestry.length) {
+                nextSlot.style.display = "none";
                 clearInterval(timerInterval);
-                setTimeout(() => {
-                    alert("🎉 ألف مبروك! نجحت في ترتيب شجرة النسب الشريف قبل انتهاء الوقت وتستحق الجائزة ١٠٠ جنيه! 🏆");
-                }, 300);
+                setTimeout(showWin, 600);
             }
         } else {
-            showToast("مكان خاطئ! جرب ورقة أخرى.", "error");
+            wrongCount++;
+            wrongBox.innerText = `✖ المحاولات الخاطئة: ${toArabicNumber(wrongCount)}`;
+            wrongBox.classList.remove("bump");
+            void wrongBox.offsetWidth; /* إعادة تشغيل الحركة */
+            wrongBox.classList.add("bump");
+
+            btn.classList.add("wrong");
+            nextSlot.classList.add("shake");
+            setTimeout(() => {
+                btn.classList.remove("wrong");
+                nextSlot.classList.remove("shake");
+            }, 550);
+            showToast("ليس هذا الاسم، ركّز وحاول مرة أخرى", "error");
+        }
+    }
+
+    function showWin() {
+        winBanner.style.display = "flex";
+        launchConfetti();
+    }
+
+    /* كونفيتي للاحتفال */
+    function launchConfetti() {
+        const colors = ["#d4af37", "#f5efdd", "#9fdcb4", "#e8cf7a", "#14694a"];
+        for (let i = 0; i < 80; i++) {
+            const c = document.createElement("div");
+            c.className = "confetti";
+            const size = 5 + Math.random() * 9;
+            c.style.width = size + "px";
+            c.style.height = size * 0.6 + "px";
+            c.style.left = Math.random() * 100 + "vw";
+            c.style.background = colors[i % colors.length];
+            c.style.borderRadius = Math.random() > 0.5 ? "50%" : "2px";
+            c.style.animationDuration = (2.5 + Math.random() * 2.5) + "s";
+            c.style.animationDelay = (Math.random() * 1.5) + "s";
+            document.body.appendChild(c);
+            setTimeout(() => c.remove(), 7000);
         }
     }
 
@@ -434,10 +614,10 @@
         toastMsg.innerText = msg;
         toastMsg.className = `toast ${type}`;
         toastMsg.style.display = "block";
-        setTimeout(() => { toastMsg.style.display = "none"; }, 2000);
+        clearTimeout(showToast._t);
+        showToast._t = setTimeout(() => { toastMsg.style.display = "none"; }, 2000);
     }
 
-    initTreeLeaves();
     initBank();
     startTimer();
 </script>
