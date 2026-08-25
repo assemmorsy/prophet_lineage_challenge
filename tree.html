@@ -223,7 +223,7 @@
     <p class="subtitle">اسحب الاسم بالماوس وأسقطه مباشرة فوق رقم الورقة المناسبة</p>
 
     <div class="game-header">
-        <div class="prize-box">🎁 الجائزة: 🎯 ١٠٠ جنيه</div>
+        <div class="prize-box">🎁 الجائزة الاولى</div>
         <div class="timer-box" id="timerBox">⏳ الوقت المتبقي: ٠٣:٠٠</div>
     </div>
 
@@ -313,7 +313,7 @@
                 isGameOver = true;
                 timerBox.innerText = "⏳ انتهى الوقت!";
                 showToast("انتهى الوقت للأسف! حاول مرة أخرى ⏱️", "error");
-                setTimeout(() => alert("❌ انتهت الـ 3 دقائق! حاول مرة أخرى للحصول على الجائزة ١٠٠ جنيه!"), 300);
+                setTimeout(() => alert("❌ انتهت الـ 3 دقائق! حاول مرة أخرى للحصول على الجائزة الاولى!"), 300);
                 return;
             }
 
@@ -417,7 +417,7 @@
             if (completedCount === ancestryTree.length) {
                 clearInterval(timerInterval);
                 setTimeout(() => {
-                    alert("🎉 ألف مبروك! نجحت في ترتيب شجرة النسب الشريف قبل انتهاء الوقت وتستحق الجائزة ١٠٠ جنيه! 🏆");
+                    alert("🎉 ألف مبروك! نجحت في ترتيب شجرة النسب الشريف قبل انتهاء الوقت وتستحق الجائزة الاولى! 🏆");
                 }, 300);
             }
         } else {

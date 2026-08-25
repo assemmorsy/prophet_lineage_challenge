@@ -365,6 +365,38 @@
             border-radius: 10px;
             cursor: pointer;
         }
+        .winner-form {
+            margin-top: 16px;
+            padding: 14px;
+            background: rgba(6, 35, 26, 0.6);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            border-radius: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .winner-form p {
+            margin: 0;
+            color: #f5efdd;
+            font-size: 0.95rem;
+        }
+        .winner-form input {
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            background: rgba(245, 239, 221, 0.1);
+            color: #f5efdd;
+            font-size: 1rem;
+            text-align: center;
+        }
+        .winner-form input::placeholder {
+            color: rgba(245, 239, 221, 0.5);
+        }
+        .winner-form .save-status {
+            font-size: 0.85rem;
+            color: #9fdcb4;
+            min-height: 1.2em;
+        }
         .win-actions {
             display: flex;
             gap: 12px;
@@ -407,9 +439,9 @@
     </header>
 
     <div class="game-header">
-        <div class="prize-box">🎁 الجائزة: ١٠٠ جنيه</div>
+        <div class="prize-box">🎁 الجائزة الاولى</div>
         <div class="stars-box" id="starsBox">✦ الأسماء الصحيحة: ٠ / ٢١</div>
-        <div class="wrong-box" id="wrongBox">✖ المحاولات الخاطئة: ٠ / ٣</div>
+        <div class="wrong-box" id="wrongBox">✖ المحاولات الخاطئة: ٠ / ٢</div>
         <div class="timer-box" id="timerBox">⏳ الوقت المتبقي: ٠٣:٠٠</div>
     </div>
 
@@ -441,7 +473,13 @@
     <div class="win-banner" id="winBanner">
         <div class="win-card">
             <h2>ما شاء الله، أحسنت!</h2>
-            <p>أكملت سلسلة نسب النبي ﷺ كاملة بالكتابة من ذاكرتك<br>وتستحق جائزة الـ ١٠٠ جنيه</p>
+            <p>أكملت سلسلة نسب النبي ﷺ كاملة بالكتابة من ذاكرتك<br>وتستحق الجائزة الاولى</p>
+            <div class="winner-form" id="winnerForm">
+                <p>⏱️ الوقت المستغرق: <span id="finishTime">--</span></p>
+                <input type="text" id="winnerName" placeholder="اكتب اسمك الكريم" autocomplete="name">
+                <button onclick="saveWinner()">💾 حفظ الإنجاز</button>
+                <p class="save-status" id="saveStatus"></p>
+            </div>
             <div class="win-actions">
                 <button onclick="location.reload()">العب مرة أخرى</button>
                 <button class="secondary" onclick="location.href='index.html'">🏠 الرئيسية</button>
@@ -476,8 +514,11 @@
 
     let currentIndex = 0;
     let wrongCount = 0;
-    const MAX_WRONG = 3;
+    const MAX_WRONG = 2;
     let totalSeconds = 180;
+
+    /* ضع هنا رابط Google Apps Script بعد النشر */
+    const SHEET_API_URL = "PASTE_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
     let timerInterval = null;
     let isGameOver = false;
 
@@ -573,14 +614,14 @@
             inputElem.value = "";
             inputElem.focus();
 
-            /* ثلاث محاولات خاطئة = بداية من جديد */
+            /* محاولتان خاطئتان = بداية من جديد */
             if (wrongCount >= MAX_WRONG) {
                 isGameOver = true;
                 clearInterval(timerInterval);
                 errorElem.innerText = "";
                 setTimeout(() => showGameOver(
-                    "ثلاث محاولات خاطئة ❌",
-                    "لقد أخطأت ثلاث مرات!<br>ابدأ من جديد وركّز في ترتيب النسب الشريف"
+                    "محاولتان خاطئتان ❌",
+                    "لقد أخطأت مرتين!<br>ابدأ من جديد وركّز في ترتيب النسب الشريف"
                 ), 700);
                 return;
             }
@@ -589,9 +630,43 @@
         }
     }
 
+    function formatTime(seconds) {
+        const m = Math.floor(seconds / 60);
+        const s = seconds % 60;
+        const mm = toArabicNumber(m);
+        const ss = s < 10 ? '٠' + toArabicNumber(s) : toArabicNumber(s);
+        return `${mm}:${ss}`;
+    }
+
     function showWin() {
         winBanner.style.display = "flex";
+        const elapsed = 180 - totalSeconds;
+        document.getElementById("finishTime").innerText = formatTime(elapsed);
         launchConfetti();
+    }
+
+    function saveWinner() {
+        const nameInput = document.getElementById("winnerName");
+        const status = document.getElementById("saveStatus");
+        const name = nameInput.value.trim();
+        if (!name) {
+            status.innerText = "⚠️ الرجاء إدخال الاسم أولاً";
+            status.style.color = "#e8cf7a";
+            return;
+        }
+        const elapsed = 180 - totalSeconds;
+        const record = {
+            name,
+            level: "كتابة",
+            elapsedSeconds: elapsed,
+            finishedAt: new Date().toISOString()
+        };
+        const winners = JSON.parse(localStorage.getItem("nabawiWinners") || "[]");
+        winners.push(record);
+        localStorage.setItem("nabawiWinners", JSON.stringify(winners));
+        status.innerText = "✅ تم حفظ إنجازك!";
+        status.style.color = "#9fdcb4";
+        nameInput.disabled = true;
     }
 
     /* كونفيتي للاحتفال */
