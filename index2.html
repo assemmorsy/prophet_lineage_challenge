@@ -14,7 +14,7 @@
             background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
             color: #ffffff;
             margin: 0;
-            padding: 15px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -23,7 +23,7 @@
         h1 {
             color: #f4d03f;
             text-shadow: 0 0 10px rgba(244, 208, 63, 0.4);
-            margin: 0 0 5px 0;
+            margin-bottom: 5px;
             text-align: center;
             font-size: 1.8rem;
         }
@@ -37,7 +37,7 @@
 
         .game-header {
             width: 100%;
-            max-width: 1100px;
+            max-width: 900px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -82,37 +82,14 @@
             100% { transform: scale(1); }
         }
 
-        /* تخطيط الصفحة: بنك اليمين - الشجرة في المنتصف - بنك اليسار */
-        .main-layout {
-            display: flex;
-            width: 100%;
-            max-width: 1200px;
-            gap: 15px;
-            align-items: flex-start;
-            justify-content: center;
-        }
-
-        .side-bank {
-            flex: 1;
-            max-width: 180px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(46, 204, 113, 0.3);
-            border-radius: 15px;
-            padding: 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            min-height: 600px;
-            align-items: center;
-        }
-
         .tree-viewport {
-            flex: 2;
             position: relative;
+            width: 100%;
+            max-width: 900px;
             background: #ffffff;
             border: 3px solid #27ae60;
             border-radius: 20px;
-            padding: 5px;
+            padding: 10px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             display: flex;
             justify-content: center;
@@ -122,7 +99,7 @@
 
         svg.tree-svg {
             width: 100%;
-            height: 700px;
+            height: 720px;
         }
 
         .leaf-group {
@@ -161,6 +138,7 @@
             filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.2));
         }
 
+        /* تكبير الحجم وتغميق الخط بالكامل */
         .leaf-text {
             font-size: 15px;
             font-weight: 900;
@@ -170,19 +148,43 @@
             pointer-events: none;
         }
 
+        /* تنسيق الأرقام بدون أقواس بخط كبير وأسود بولد */
         .leaf-text.empty-text {
             fill: #000000;
             font-size: 22px;
             font-weight: 900;
         }
 
-        .leaf-btn {
+        .bank-container {
             width: 100%;
+            max-width: 900px;
+            margin-top: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(46, 204, 113, 0.3);
+            border-radius: 15px;
+            padding: 15px;
             text-align: center;
+        }
+
+        .bank-title {
+            color: #f4d03f;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .names-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .leaf-btn {
             background: linear-gradient(135deg, #27ae60, #1e8449);
             color: white;
-            padding: 8px 10px;
-            border-radius: 15px;
+            padding: 8px 16px;
+            border-radius: 20px;
             font-weight: bold;
             font-size: 0.9rem;
             cursor: grab;
@@ -218,55 +220,53 @@
 <body>
 
     <h1>شجرة النسب النبوي الشريف 🌿</h1>
-    <p class="subtitle">اسحب الاسم من القائمتين الجانبيتين وأسقطه فوق رقم الورقة المناسبة</p>
+    <p class="subtitle">اسحب الاسم بالماوس وأسقطه مباشرة فوق رقم الورقة المناسبة</p>
 
     <div class="game-header">
         <div class="prize-box">🎁 الجائزة: 🎯 ١٠٠ جنيه</div>
         <div class="timer-box" id="timerBox">⏳ الوقت المتبقي: ٠٣:٠٠</div>
     </div>
 
-    <!-- التخطيط الثلاثي: بنك يمين + شجرة + بنك يسار -->
-    <div class="main-layout">
-        <div class="side-bank" id="bankRight"></div>
+    <div class="tree-viewport">
+        <svg class="tree-svg" viewBox="0 0 800 750">
+            <path d="M 200,380 C 100,350 80,180 220,100 C 300,30 500,30 580,100 C 720,180 700,350 600,380 C 500,430 300,430 200,380 Z" fill="#e8f8f5" opacity="0.7"/>
+            <path d="M 220,360 C 130,330 110,190 240,120 C 320,50 480,50 560,120 C 690,190 670,330 580,360 C 480,410 320,410 220,360 Z" fill="#d4efdf" opacity="0.6"/>
 
-        <div class="tree-viewport">
-            <svg class="tree-svg" viewBox="0 0 800 750">
-                <path d="M 200,380 C 100,350 80,180 220,100 C 300,30 500,30 580,100 C 720,180 700,350 600,380 C 500,430 300,430 200,380 Z" fill="#e8f8f5" opacity="0.7"/>
-                <path d="M 220,360 C 130,330 110,190 240,120 C 320,50 480,50 560,120 C 690,190 670,330 580,360 C 480,410 320,410 220,360 Z" fill="#d4efdf" opacity="0.6"/>
+            <g stroke="#795548" stroke-linecap="round" fill="none">
+                <path d="M 400,720 Q 395,580 400,450" stroke-width="42"/>
+                <path d="M 400,720 Q 405,580 400,450" stroke-width="36" stroke="#5d4037"/>
+                
+                <path d="M 400,550 Q 320,480 230,420" stroke-width="20"/>
+                <path d="M 400,550 Q 480,480 570,420" stroke-width="20"/>
+                
+                <path d="M 400,480 Q 300,380 180,300" stroke-width="14"/>
+                <path d="M 400,480 Q 500,380 620,300" stroke-width="14"/>
 
-                <g stroke="#795548" stroke-linecap="round" fill="none">
-                    <path d="M 400,720 Q 395,580 400,450" stroke-width="42"/>
-                    <path d="M 400,720 Q 405,580 400,450" stroke-width="36" stroke="#5d4037"/>
-                    
-                    <path d="M 400,550 Q 320,480 230,420" stroke-width="20"/>
-                    <path d="M 400,550 Q 480,480 570,420" stroke-width="20"/>
-                    
-                    <path d="M 400,480 Q 300,380 180,300" stroke-width="14"/>
-                    <path d="M 400,480 Q 500,380 620,300" stroke-width="14"/>
+                <path d="M 400,420 Q 340,300 250,200" stroke-width="10"/>
+                <path d="M 400,420 Q 460,300 550,200" stroke-width="10"/>
 
-                    <path d="M 400,420 Q 340,300 250,200" stroke-width="10"/>
-                    <path d="M 400,420 Q 460,300 550,200" stroke-width="10"/>
+                <path d="M 400,380 Q 400,240 400,100" stroke-width="12"/>
+            </g>
 
-                    <path d="M 400,380 Q 400,240 400,100" stroke-width="12"/>
-                </g>
+            <g transform="translate(400, 685)">
+                <rect x="-110" y="-30" width="220" height="60" rx="30" fill="url(#goldGrad)" stroke="#ffffff" stroke-width="2" filter="drop-shadow(0 4px 8px rgba(0,0,0,0.3))"/>
+                <text x="0" y="5" font-size="20" font-weight="bold" fill="#0f2027" text-anchor="middle">سيدنا محمد ﷺ</text>
+            </g>
 
-                <g transform="translate(400, 685)">
-                    <rect x="-110" y="-30" width="220" height="60" rx="30" fill="url(#goldGrad)" stroke="#ffffff" stroke-width="2" filter="drop-shadow(0 4px 8px rgba(0,0,0,0.3))"/>
-                    <text x="0" y="5" font-size="20" font-weight="bold" fill="#0f2027" text-anchor="middle">سيدنا محمد ﷺ</text>
-                </g>
+            <defs>
+                <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#f4d03f" />
+                    <stop offset="100%" stop-color="#f39c12" />
+                </linearGradient>
+            </defs>
 
-                <defs>
-                    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#f4d03f" />
-                        <stop offset="100%" stop-color="#f39c12" />
-                    </linearGradient>
-                </defs>
+            <g id="leavesContainer"></g>
+        </svg>
+    </div>
 
-                <g id="leavesContainer"></g>
-            </svg>
-        </div>
-
-        <div class="side-bank" id="bankLeft"></div>
+    <div class="bank-container">
+        <div class="bank-title">🌿 اسحب اسم الأب بالماوس وضع الكرسر فوق رقم الورقة:</div>
+        <div class="names-flex" id="namesBank"></div>
     </div>
 
     <div class="toast" id="toastMsg"></div>
@@ -281,6 +281,7 @@
 
     const arabicDigits = ["٠", "١", "٢", "٣", "٤", "٥", "٦", "٧", "٨", "٩"];
 
+    // تحويل مباشر للرقم العربي بدون إضافة صفر
     function toArabicNumber(num) {
         return num.toString().replace(/\d/g, d => arabicDigits[d]);
     }
@@ -300,8 +301,7 @@
     let isGameOver = false;
 
     const leavesContainer = document.getElementById("leavesContainer");
-    const bankRight = document.getElementById("bankRight");
-    const bankLeft = document.getElementById("bankLeft");
+    const namesBank = document.getElementById("namesBank");
     const toastMsg = document.getElementById("toastMsg");
     const timerBox = document.getElementById("timerBox");
     const leafShapePath = "M 0,-25 C 20,-15 25,10 0,25 C -25,10 -20,-15 0,-25 Z";
@@ -346,6 +346,7 @@
             const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
             text.setAttribute("class", "leaf-text empty-text");
             text.setAttribute("y", "2");
+            // الرقم العربي فقط بدون أقواس أو أصفار زادت
             text.textContent = toArabicNumber(index + 1);
 
             g.appendChild(path);
@@ -372,10 +373,9 @@
         });
     }
 
-    // توزيع الأسماء بالتساوي على العمودين الأيمن والأيسر
     function initBank() {
         const shuffled = [...ancestryTree].sort(() => Math.random() - 0.5);
-        shuffled.forEach((name, idx) => {
+        shuffled.forEach(name => {
             const btn = document.createElement("div");
             btn.className = "leaf-btn";
             btn.innerText = name;
@@ -393,12 +393,7 @@
                 btn.classList.remove("dragging");
             });
 
-            // إضافة النصف في اليمين والنصف في اليسار
-            if (idx % 2 === 0) {
-                bankRight.appendChild(btn);
-            } else {
-                bankLeft.appendChild(btn);
-            }
+            namesBank.appendChild(btn);
         });
     }
 
