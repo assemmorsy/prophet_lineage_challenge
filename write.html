@@ -441,7 +441,7 @@
     <div class="game-header">
         <div class="prize-box">🎁 الجائزة الاولى</div>
         <div class="stars-box" id="starsBox">✦ الأسماء الصحيحة: ٠ / ٢١</div>
-        <div class="wrong-box" id="wrongBox">✖ المحاولات الخاطئة: ٠ / ٢</div>
+        <div class="wrong-box" id="wrongBox">✖ المحاولات الخاطئة: ٠</div>
         <div class="timer-box" id="timerBox">⏳ الوقت المتبقي: ٠٣:٠٠</div>
     </div>
 
@@ -514,7 +514,6 @@
 
     let currentIndex = 0;
     let wrongCount = 0;
-    const MAX_WRONG = 2;
     let totalSeconds = 180;
 
     const API_URL = "/save-winner";
@@ -602,7 +601,7 @@
             }
         } else {
             wrongCount++;
-            wrongBox.innerText = `✖ المحاولات الخاطئة: ${toArabicNumber(wrongCount)} / ${toArabicNumber(MAX_WRONG)}`;
+            wrongBox.innerText = `✖ المحاولات الخاطئة: ${toArabicNumber(wrongCount)}`;
             wrongBox.classList.remove("bump");
             void wrongBox.offsetWidth;
             wrongBox.classList.add("bump");
@@ -613,19 +612,7 @@
             inputElem.value = "";
             inputElem.focus();
 
-            /* محاولتان خاطئتان = بداية من جديد */
-            if (wrongCount >= MAX_WRONG) {
-                isGameOver = true;
-                clearInterval(timerInterval);
-                errorElem.innerText = "";
-                setTimeout(() => showGameOver(
-                    "محاولتان خاطئتان ❌",
-                    "لقد أخطأت مرتين!<br>ابدأ من جديد وركّز في ترتيب النسب الشريف"
-                ), 700);
-                return;
-            }
-
-            errorElem.innerText = `إجابة خاطئة! تبقّى لك ${toArabicNumber(MAX_WRONG - wrongCount)} محاولات`;
+            errorElem.innerText = "إجابة خاطئة! حاول مرة أخرى";
         }
     }
 
